@@ -1,0 +1,46 @@
+version: 0.1.0
+
+stance_directions:
+  - favourable
+  - critical
+  - neutral_descriptive
+  - mixed
+  - unclear
+  - insufficient_evidence
+
+frames:
+  - legitimising
+  - delegitimising
+  - criminalising
+  - victimising
+  - heroising
+  - law_and_order
+  - civil_rights
+  - institutional_accountability
+  - institutional_trust
+  - public_disruption
+  - electoral_political
+  - conspiratorial
+  - procedural_legal
+  - human_interest
+  - evidence_verification
+  - other
+
+claim_types:
+  - observed_fact
+  - verified_fact
+  - reported_allegation
+  - speaker_allegation
+  - opinion
+  - question
+  - speculation
+  - prediction
+  - quotation
+  - unclear
+
+certainty_treatments:
+  - explicitly_qualified
+  - implicitly_qualified
+  - asserted_as_fact
+  - contested
+  - unclear

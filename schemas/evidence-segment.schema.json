@@ -1,0 +1,155 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://project-parallax.example/schemas/evidence-segment.schema.json",
+  "title": "Project Parallax Evidence Segment",
+  "type": "object",
+  "required": [
+    "record_id",
+    "source_url",
+    "outlet",
+    "segment_start_seconds",
+    "segment_end_seconds",
+    "speaker_role",
+    "target_entity",
+    "excerpt",
+    "original_language",
+    "stance_direction",
+    "claim_type",
+    "certainty_treatment",
+    "evidence_tier",
+    "review_status"
+  ],
+  "properties": {
+    "record_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "video_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "outlet": {
+      "type": "string",
+      "minLength": 1
+    },
+    "programme": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "published_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "segment_start_seconds": {
+      "type": "number",
+      "minimum": 0
+    },
+    "segment_end_seconds": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "speaker_name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "speaker_role": {
+      "type": "string",
+      "minLength": 1
+    },
+    "target_entity": {
+      "type": "string",
+      "minLength": 1
+    },
+    "excerpt": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 500
+    },
+    "original_language": {
+      "type": "string",
+      "minLength": 2
+    },
+    "translation": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "stance_direction": {
+      "enum": [
+        "favourable",
+        "critical",
+        "neutral_descriptive",
+        "mixed",
+        "unclear",
+        "insufficient_evidence"
+      ]
+    },
+    "frames": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "claim_type": {
+      "type": "string"
+    },
+    "certainty_treatment": {
+      "type": "string"
+    },
+    "evidence_tier": {
+      "enum": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    "review_status": {
+      "enum": [
+        "machine_only",
+        "human_reviewed",
+        "second_reviewed",
+        "rejected"
+      ]
+    },
+    "transcript_source": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "model_name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "model_version": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "reviewer_notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

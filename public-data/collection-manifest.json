@@ -1,0 +1,10 @@
+{
+  "project": "Project Parallax",
+  "dataset": "NEET Protest 2026 Media Analysis",
+  "dataset_version": "0.1.0",
+  "status": "scaffold",
+  "collection_start": null,
+  "collection_end": null,
+  "included_event": "NEET 2026 protests",
+  "notes": "Collection dates must be set before production ingestion."
+}

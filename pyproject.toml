@@ -1,0 +1,23 @@
+[project]
+name = "neet-protest-2026-media-analysis"
+version = "0.1.0"
+description = "Evidence-first media framing analysis for the NEET 2026 protests"
+requires-python = ">=3.11"
+dependencies = [
+  "pydantic>=2.7,<3",
+  "pandas>=2.2,<3",
+  "pyarrow>=16,<20",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8,<9",
+  "ruff>=0.5,<1",
+  "jsonschema>=4.22,<5",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
