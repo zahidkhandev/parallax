@@ -1,0 +1,103 @@
+name: Timestamped evidence submission
+description: Propose a media segment connected specifically to the NEET 2026 protests.
+title: "[Evidence]: "
+labels: ["evidence-submission", "needs-review"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Submit only a source URL, metadata, timestamps, a limited excerpt, and annotations. Do not upload media, subtitles, complete transcripts, secrets, or personal data. A proposal is not a finding; reviewers apply the same standards to every actor.
+  - type: checkboxes
+    id: eligibility
+    attributes:
+      label: Eligibility
+      options:
+        - label: This item is directly connected to media coverage of the NEET 2026 protests.
+          required: true
+        - label: I have not submitted downloaded media, subtitles, or a complete transcript.
+          required: true
+  - type: input
+    id: source_url
+    attributes:
+      label: Source URL
+      description: Link to the original or most authoritative available publication.
+    validations:
+      required: true
+  - type: input
+    id: outlet_programme
+    attributes:
+      label: Outlet and programme
+    validations:
+      required: true
+  - type: input
+    id: published_at
+    attributes:
+      label: Publication date and time
+      placeholder: YYYY-MM-DD and timezone, if known
+  - type: input
+    id: timestamps
+    attributes:
+      label: Start and end timestamps
+      placeholder: 00:01:20–00:01:42
+    validations:
+      required: true
+  - type: dropdown
+    id: evidence_kind
+    attributes:
+      label: Evidence kind
+      options: [Spoken, Headline, Thumbnail, Description, Ticker, Other packaging]
+    validations:
+      required: true
+  - type: textarea
+    id: excerpt
+    attributes:
+      label: Limited exact excerpt
+      description: Include only the shortest excerpt needed to evaluate the observation.
+    validations:
+      required: true
+  - type: textarea
+    id: speaker_source
+    attributes:
+      label: Speaker and attributed source
+      description: Identify the speaker's role and any source being quoted. A guest must not be attributed to an anchor or outlet.
+    validations:
+      required: true
+  - type: textarea
+    id: target
+    attributes:
+      label: Target actor
+      description: Name the actor targeted by the proposed stance and give the actor category.
+    validations:
+      required: true
+  - type: dropdown
+    id: stance
+    attributes:
+      label: Proposed stance
+      options: [favourable, critical, neutral_descriptive, mixed, unclear, insufficient_evidence]
+    validations:
+      required: true
+  - type: textarea
+    id: annotations
+    attributes:
+      label: Topic, claim, certainty, qualification, and loaded language
+      description: Explain the proposal, uncertainties, surrounding context, and whether any allegation is qualified.
+    validations:
+      required: true
+  - type: dropdown
+    id: tier
+    attributes:
+      label: Proposed evidence tier
+      options:
+        - "A — timestamped spoken evidence with verified source and speaker"
+        - "B — exact reliable quotation or attribution without complete audiovisual verification"
+        - "C — headline, thumbnail, description, or packaging evidence only"
+        - "D — mixed stream, unresolved identity, or insufficient attribution"
+    validations:
+      required: true
+  - type: checkboxes
+    id: rights
+    attributes:
+      label: Submission agreement
+      options:
+        - label: I understand that original annotations I contribute are offered under CC BY 4.0 and that third-party material remains excluded.
+          required: true

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Project Parallax — NEET Protest 2026 Media Analysis</title>
+<style>
+:root{--ink:#18222f;--muted:#5c6878;--paper:#f6f4ef;--card:#fff;--line:#d9dde3;--blue:#315b7d;--gold:#c89b3c}
+*{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 system-ui,sans-serif}
+header{background:#172b3a;color:white;padding:3rem max(5vw,1rem)} header p{max-width:70rem;color:#dbe6ed}
+main{max-width:1180px;margin:auto;padding:2rem 1rem 4rem} h1{font-size:clamp(2rem,5vw,4rem);line-height:1.05;margin:.2rem 0}
+h2{margin-top:0} .eyebrow{color:#f0c96b;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.notice{border-left:5px solid var(--gold);background:#fff8df;padding:1rem 1.25rem;margin:1.5rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1rem;margin:1.5rem 0}
+.card,section{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:1.25rem;box-shadow:0 2px 8px #18222f0d}
+.card strong{display:block;font-size:1.8rem;color:var(--blue)} section{margin:1rem 0;overflow:auto}
+table{width:100%;border-collapse:collapse} th,td{padding:.65rem;text-align:left;border-bottom:1px solid var(--line)}
+.bar-cell{width:45%} .bar-cell span{display:block;height:.75rem;background:var(--blue);border-radius:1rem;min-width:0}
+.empty,.muted{color:var(--muted)} footer{padding:2rem max(5vw,1rem);background:#e8e5de;color:var(--muted)}
+code{overflow-wrap:anywhere} @media print{body{background:white} section,.card{box-shadow:none}}
+.filters{display:flex;flex-wrap:wrap;gap:.75rem;margin:1rem 0} label{font-weight:650} input,select{display:block;padding:.55rem;border:1px solid #9da7b3;border-radius:5px;min-width:10rem}
+.evidence-table{min-width:1050px} small{color:var(--muted)} q{quotes:none} [hidden]{display:none!important}
+</style></head><body>
+<header><div class="eyebrow">Project Parallax</div><h1>NEET Protest 2026<br>Media Analysis</h1>
+<p>Rolling report window: <strong>01 Jul 2026 through 25 Jul 2026</strong>. This report measures observable coverage patterns and does not determine motives, honesty, ideology, or character.</p></header>
+<main><div class="notice"><strong>Evidence status:</strong> No reviewed evidence has been published for this window yet. Machine-only and rejected records are excluded by default.</div>
+<div class="grid"><div class="card"><span>Evidence records</span><strong>0</strong></div>
+<div class="card"><span>Distinct source segments</span><strong>0</strong></div>
+<div class="card"><span>Human-review coverage</span><strong>Not available</strong></div>
+<div class="card"><span>Spoken material</span><strong>0s</strong></div></div>
+<section><h2>Targeted stance</h2><p class="muted">Counts are target-specific evidence records, not verdicts about truth or intent.</p>
+<table><thead><tr><th>Target actor type</th><th>Stance</th><th>Records</th></tr></thead><tbody><tr><td colspan='3' class='empty'>No reviewed stance records yet.</td></tr></tbody></table></section>
+<section><h2>Topic attention — distinct spoken segments</h2><table><thead><tr><th>Category</th><th>Seconds</th><th>Relative magnitude</th></tr></thead><tbody><tr><td colspan='3' class='empty'>No included evidence yet.</td></tr></tbody></table></section>
+<section><h2>Speaker representation — distinct spoken segments</h2><table><thead><tr><th>Category</th><th>Seconds</th><th>Relative magnitude</th></tr></thead><tbody><tr><td colspan='3' class='empty'>No included evidence yet.</td></tr></tbody></table></section>
+<section><h2>Evidence quality — distinct segments</h2><table><thead><tr><th>Category</th><th>Segments</th><th>Relative magnitude</th></tr></thead><tbody><tr><td colspan='3' class='empty'>No included evidence yet.</td></tr></tbody></table></section>
+<section><h2>Claim type and certainty</h2><table><thead><tr><th>Category</th><th>Segments</th><th>Relative magnitude</th></tr></thead><tbody><tr><td colspan='3' class='empty'>No included evidence yet.</td></tr></tbody></table></section>
+<section><h2>Packaging support</h2><table><thead><tr><th>Category</th><th>Segments</th><th>Relative magnitude</th></tr></thead><tbody><tr><td colspan='3' class='empty'>No included evidence yet.</td></tr></tbody></table></section>
+<section><h2>Review states</h2><table><thead><tr><th>Category</th><th>Records</th><th>Relative magnitude</th></tr></thead><tbody><tr><td colspan='3' class='empty'>No included evidence yet.</td></tr></tbody></table></section>
+<section><h2>Annotation conflicts</h2><table><thead><tr><th>Category</th><th>Segments</th><th>Relative magnitude</th></tr></thead><tbody><tr><td colspan='3' class='empty'>No included evidence yet.</td></tr></tbody></table></section>
+<section id="evidence"><h2>Timestamped evidence explorer</h2><p class="muted">A guest remains attributed to the guest; target actors and editorial speakers are displayed separately. Excerpts are limited public evidence, not complete transcripts.</p>
+<div class="filters"><label>Search<input id="evidence-search" type="search" placeholder="Outlet, speaker, target, excerpt"></label>
+<label>Stance<select id="stance-filter"><option value="">All</option><option value="favourable">favourable</option><option value="critical">critical</option><option value="neutral_descriptive">neutral descriptive</option><option value="mixed">mixed</option><option value="unclear">unclear</option><option value="insufficient_evidence">insufficient evidence</option></select></label>
+<label>Tier<select id="tier-filter"><option value="">All</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option></select></label>
+<label>Review<select id="review-filter"><option value="">All</option><option value="machine_only">machine only</option><option value="human_reviewed">human reviewed</option><option value="second_reviewed">second reviewed</option><option value="rejected">rejected</option></select></label></div>
+<p id="filter-status" role="status">Showing 0 evidence record(s).</p>
+<table class="evidence-table"><thead><tr><th>Source</th><th>Timestamp</th><th>Speaker</th><th>Target actor</th><th>Stance</th><th>Limited excerpt</th><th>Evidence / review</th></tr></thead><tbody><tr class='empty-row'><td colspan='7' class='empty'>No reviewed evidence records are available for this report window.</td></tr></tbody></table></section>
+<section id="corrections"><h2>Correction history</h2><table><thead><tr><th>Correction</th><th>Record</th><th>Field</th><th>Corrected at</th><th>Reason</th><th>Metrics affected</th></tr></thead><tbody><tr><td colspan='6' class='empty'>No corrections recorded.</td></tr></tbody></table></section>
+<section><h2>Reproducibility</h2><p>Dataset <strong>0.1.0</strong>; methodology 1.0.0; taxonomy 1.0.0; evidence schema 1.0.0.</p>
+<p>Evidence SHA-256: <code>e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</code>. Validated corrections: 0.</p></section>
+</main><footer>Project Parallax · Politically neutral, evidence-first analysis · Topic durations may be non-exclusive.</footer>
+<script>(()=>{const rows=[...document.querySelectorAll('.evidence-row')],q=document.querySelector('#evidence-search'),stance=document.querySelector('#stance-filter'),tier=document.querySelector('#tier-filter'),review=document.querySelector('#review-filter'),status=document.querySelector('#filter-status');function apply(){let shown=0;for(const row of rows){const visible=(!q.value||row.dataset.search.includes(q.value.toLocaleLowerCase()))&&(!stance.value||row.dataset.stance===stance.value)&&(!tier.value||row.dataset.tier===tier.value)&&(!review.value||row.dataset.review===review.value);row.hidden=!visible;if(visible)shown++}status.textContent=`Showing ${shown} evidence record(s).`}for(const control of [q,stance,tier,review])control.addEventListener('input',apply)})();</script>
+</body></html>

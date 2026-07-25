@@ -1,137 +1,95 @@
-# Project Parallax
+# Project Parallax — NEET Protest 2026 Media Analysis
 
-## NEET Protest 2026 Media Analysis
+[![Validate](https://github.com/project-parallax/neet-protest-2026-media-analysis/actions/workflows/validate.yml/badge.svg)](https://github.com/project-parallax/neet-protest-2026-media-analysis/actions/workflows/validate.yml)
 
-**Project Parallax** is an open-source, evidence-first study of how Indian news media framed the NEET 2026 protests and the actors involved.
+**Project Parallax** is a politically neutral, open-source research repository for measuring observable patterns in media coverage connected specifically to the **NEET 2026 protests**. It does not begin with a conclusion that any participant, institution, party, journalist, programme, or outlet is correct or biased.
 
-The project does **not** begin with a conclusion that any outlet, protest group, government body, political party, police force, journalist, or institution is correct or biased. It measures observable coverage patterns using timestamped evidence, explicit speaker attribution, published definitions, and human review.
+> **Prominent disclaimer:** This project analyses observable coverage patterns in identified media items. It does **not** determine motives, honesty, ideology, or character. Its annotations are bounded, reviewable observations—not verdicts about people or organisations.
 
-## Research questions
+## What the project measures
 
-- Which actors receive favourable, critical, neutral, mixed, or unclear coverage?
-- Which actors are most frequently targeted by negative framing?
-- Which voices receive airtime, quotation, or attribution?
-- How much attention is given to protest demands, institutional response, policing, public disruption, politics, and allegations?
-- Are headlines and thumbnails supported by the spoken content?
-- Are allegations presented as allegations, questions, opinions, or established facts?
-- How do framing patterns differ between outlets and programmes?
+Each observation is a timestamped spoken or editorial-packaging segment. Records measure:
 
-## Scope
+- favourable, critical, neutral, mixed, unclear, or insufficient-evidence stance **toward an explicitly named target actor**;
+- representation of speakers and attributed sources, without treating a guest's words as an anchor's or outlet's words;
+- topic attention and frame labels;
+- loaded-language terms with a written rationale;
+- claim type, certainty, and whether allegations are qualified;
+- whether headline, thumbnail, description, or ticker claims are supported by reviewed spoken content; and
+- evidence tier, transcript hash, review state, and human-review coverage.
 
-This repository is limited to **media coverage of the NEET 2026 protests**.
+Target actors include protest organisers; students and candidates; parents; government representatives; education and examination authorities; police; ruling and opposition parties; courts and public institutions; anchors and correspondents; guests and experts; and other actors directly relevant to the event. The same rules apply regardless of political direction.
 
-It is not a general-purpose political monitoring repository, and it does not contain unrelated protest datasets.
+Project Parallax never collapses these dimensions into one opaque universal bias score. Aggregate results must remain traceable to records, denominators, evidence quality, and review coverage.
 
-See [SCOPE.md](SCOPE.md) for inclusion and exclusion rules.
+## Evidence and review labels
 
-## Core principles
-
-1. **No predetermined side**
-2. **Speaker attribution before outlet attribution**
-3. **Evidence before scoring**
-4. **Machine output is not a verified finding**
-5. **Short public excerpts, not a public archive of broadcasts**
-6. **Corrections remain visible**
-7. **Methods and definitions are versioned**
-8. **Comparable standards for all actors and outlets**
-
-## Actor model
-
-Coverage may target or favour any of the following:
-
-- Protest organisers
-- Individual protesters
-- Students and candidates
-- Parents
-- Government representatives
-- Exam and education authorities
-- Police and security agencies
-- Ruling-party representatives
-- Opposition-party representatives
-- Courts and public institutions
-- Journalists, anchors, guests, and commentators
-- Other actors directly relevant to the event
-
-The system does not force all coverage into a simplistic two-side model.
-
-## Evidence levels
-
-| Tier | Meaning |
+| Tier | Definition |
 |---|---|
-| A | Timestamped spoken evidence with verified source and speaker attribution |
-| B | Exact official quotation or reliable attribution, but incomplete audiovisual verification |
-| C | Headline, thumbnail, description, post, or other packaging evidence only |
-| D | Mixed stream, unresolved identity, insufficient attribution, or unverified record |
+| **A** | Timestamped spoken evidence with verified source and speaker |
+| **B** | Exact reliable quotation or attribution without complete audiovisual verification |
+| **C** | Headline, thumbnail, description, or packaging evidence only |
+| **D** | Mixed stream, unresolved identity, or insufficient attribution |
 
-Only reviewed Tier A and appropriately verified Tier B evidence should support strong public findings.
+Review states are `machine_only`, `human_reviewed`, `second_reviewed`, and `rejected`. Machine-only output is triage material, not a confirmed public finding.
 
-## Repository layout
+## Public/private boundary
 
-```text
-.
-├── public-data/             # Publishable metadata, excerpts, annotations and metrics
-├── private-workspace/       # Local-only audio, video and complete working transcripts
-├── schemas/                 # Versioned evidence and analysis schemas
-├── src/                     # Ingestion, validation and analysis code
-├── dashboard/               # Public dashboard source
-├── methodology/             # Taxonomy and scoring documentation
-├── .github/                 # Validation workflows and contribution templates
-├── SCOPE.md
-├── METHODOLOGY.md
-├── CORRECTIONS.md
-└── CONTRIBUTING.md
+`public-data/` is limited to URLs, source metadata, timestamps, short necessary excerpts, project annotations and translations, derived metrics, transcript hashes, and review status. Downloaded media, subtitles, cookies, secrets, and complete working transcripts are prohibited from public data. Keep complete working transcripts and lawful local media only in the gitignored `private-workspace/` directory.
+
+## Quick start
+
+Python 3.11 or newer is required.
+
+```bash
+python -m venv .venv
+. .venv/bin/activate
+python -m pip install -e '.[dev]'
+python -m ruff check .
+python -m pytest
+python -m src schema
+python -m src analysis-schema
+python -m src taxonomy
+python -m src validate
+python -m src analyze --output build/metrics.json
+python -m src report --output dashboard/index.html --metrics-output dashboard/metrics.json
+python -m src readiness --output build/release-readiness.json
 ```
 
-## Public-data policy
+The validator applies both the Pydantic contract in `src/models.py` and the matching Draft 2020-12 JSON Schema in `schemas/evidence-segment.schema.json` to every JSONL line. It also verifies the generated controlled taxonomy, rejects duplicate IDs and labels, validates the correction log and its record references, checks that the collection manifest's record count is exact, and fails when a checked-in contract drifts from the model.
 
-The public repository may contain:
+The analysis command validates before reading, validates its result against the Pydantic analytical contract, and writes JSON atomically. The matching generated contract is `schemas/analysis-summary.schema.json`. Every artifact identifies the dataset, methodology, taxonomy, and schema versions; the exact evidence-file SHA-256; and the number of recorded corrections. By default it excludes `machine_only` and `rejected` records from analytical counts, while still reporting their effect on review coverage. Target-specific stance remains record-based, while coverage, speaker, source, topic, claim, tier, packaging, and duration metrics deduplicate the underlying source URL/kind/timestamp segment so multiple target annotations do not inflate attention. Conflicts inside a segment group are reported explicitly. Spoken-topic and speaker attention are reported in seconds; multi-topic durations are non-exclusive. Use `--include-machine-only` only for clearly labelled exploratory work; use `--include-rejected` only for quality-control analysis.
 
-- Source URLs and video IDs
-- Outlet and programme metadata
-- Publication dates
-- Exact timestamps
-- Limited excerpts necessary to demonstrate a finding
-- Project-created translations
-- Speaker roles and verified identities where appropriate
-- Human annotations
-- Derived metrics
-- Confidence and review status
-- Correction history
-- Transcript hashes and processing manifests
+The rolling reporting window begins **1 July 2026**. `--as-of YYYY-MM-DD` fixes the inclusive report-through date for a reproducible run; when omitted it uses the current date. The collection remains open-ended so the same commands continue to include eligible coverage after today. Every nonempty-window record must have a publication timestamp inside the declared window. `report` produces a dependency-free, accessible HTML file plus optional matching metrics JSON, a timestamped evidence explorer with client-side filters, and validated correction history.
 
-The public repository should not contain, by default:
+`readiness` records deterministic structural release checks. Add `--require-ready` in a release job to fail unless the dataset is nonempty, its window is closed, the manifest is published and timestamped, machine-only evidence and annotation conflicts are absent, and analytical provenance matches. Structural readiness does not replace the human research checklist in [RELEASE.md](RELEASE.md).
 
-- Downloaded broadcasts
-- Downloaded audio
-- Full subtitle files
-- Complete third-party transcripts
-- Authentication cookies
-- API secrets
-- Personal information about ordinary participants
-- Machine-only accusations represented as confirmed facts
+When an intentional model change alters the public contract, regenerate the schema and commit both changes together:
 
-## Status
+```bash
+python -m src schema --write
+python -m src schema
+python -m src analysis-schema --write
+python -m src analysis-schema
+python -m src taxonomy --write
+python -m src taxonomy
+```
 
-The repository is currently in the **methodology and data-normalisation phase**.
+## Repository map
 
-Initial work:
+```text
+public-data/       Publishable JSONL evidence and dataset metadata
+private-workspace/ Gitignored complete transcripts and local working media
+schemas/           Machine-readable public data contract
+methodology/       Generated, machine-checked controlled taxonomy
+src/               Models, validation, CLI, and descriptive analytics
+tests/             Model, validator, CLI, manifest, and analytics tests
+dashboard/         Generated accessible report and matching metrics
+.github/            CI and structured evidence intake
+```
 
-- Import the existing NEET 2026 media inventory
-- Verify source URLs and outlet identities
-- Separate packaging evidence from spoken evidence
-- Build a timestamped evidence schema
-- Establish a neutral framing taxonomy
-- Create a human-review workflow
-- Build a reproducible public dashboard
+Read [SCOPE.md](SCOPE.md), [METHODOLOGY.md](METHODOLOGY.md), and [CONTRIBUTING.md](CONTRIBUTING.md) before submitting evidence. Published errors follow [CORRECTIONS.md](CORRECTIONS.md).
 
-## Project disclaimer
+## Licensing and third-party rights
 
-This project analyses observable patterns in specific media items. It does not determine the private motives, honesty, ideology, or character of journalists, organisations, protesters, officials, or institutions.
-
-Automated transcripts and classifications can contain errors. Named or high-severity findings require human review. Third-party media remains the property of its respective rights holders and is not licensed under this repository's open-source licences.
-
-## Licences
-
-- Source code: [Apache License 2.0](LICENSE)
-- Original project documentation, annotations and derived public data: [CC BY 4.0](DATA_LICENSE.md)
-- Third-party content: excluded from these licences unless explicitly stated
+Code is licensed under [Apache-2.0](LICENSE). Original annotations, documentation, translations, and derived data are licensed under [CC BY 4.0](DATA_LICENSE.md). **Neither licence grants rights in third-party media, transcripts, subtitles, images, logos, or quotations; those materials remain excluded.** See [NOTICE.md](NOTICE.md).

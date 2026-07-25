@@ -1,0 +1,433 @@
+{
+  "$defs": {
+    "AllegationQualificationCounts": {
+      "additionalProperties": false,
+      "properties": {
+        "conflicting_annotations": {
+          "minimum": 0,
+          "title": "Conflicting Annotations",
+          "type": "integer"
+        },
+        "qualified": {
+          "minimum": 0,
+          "title": "Qualified",
+          "type": "integer"
+        },
+        "total_allegations": {
+          "minimum": 0,
+          "title": "Total Allegations",
+          "type": "integer"
+        },
+        "unqualified": {
+          "minimum": 0,
+          "title": "Unqualified",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "qualified",
+        "unqualified",
+        "conflicting_annotations",
+        "total_allegations"
+      ],
+      "title": "AllegationQualificationCounts",
+      "type": "object"
+    },
+    "AnalysisOptionsModel": {
+      "additionalProperties": false,
+      "properties": {
+        "include_machine_only": {
+          "title": "Include Machine Only",
+          "type": "boolean"
+        },
+        "include_rejected": {
+          "title": "Include Rejected",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "include_machine_only",
+        "include_rejected"
+      ],
+      "title": "AnalysisOptionsModel",
+      "type": "object"
+    },
+    "AnalysisPopulation": {
+      "additionalProperties": false,
+      "properties": {
+        "additional_target_records": {
+          "minimum": 0,
+          "title": "Additional Target Records",
+          "type": "integer"
+        },
+        "all_records": {
+          "minimum": 0,
+          "title": "All Records",
+          "type": "integer"
+        },
+        "excluded_records": {
+          "minimum": 0,
+          "title": "Excluded Records",
+          "type": "integer"
+        },
+        "human_review_coverage": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Human Review Coverage"
+        },
+        "included_distinct_segments": {
+          "minimum": 0,
+          "title": "Included Distinct Segments",
+          "type": "integer"
+        },
+        "included_records": {
+          "minimum": 0,
+          "title": "Included Records",
+          "type": "integer"
+        },
+        "included_spoken_duration_seconds": {
+          "minimum": 0,
+          "title": "Included Spoken Duration Seconds",
+          "type": "number"
+        },
+        "reviewed_records": {
+          "minimum": 0,
+          "title": "Reviewed Records",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "all_records",
+        "included_records",
+        "included_distinct_segments",
+        "additional_target_records",
+        "excluded_records",
+        "reviewed_records",
+        "human_review_coverage",
+        "included_spoken_duration_seconds"
+      ],
+      "title": "AnalysisPopulation",
+      "type": "object"
+    },
+    "AnalysisProvenanceModel": {
+      "additionalProperties": false,
+      "properties": {
+        "collection_end": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Collection End"
+        },
+        "correction_count": {
+          "minimum": 0,
+          "title": "Correction Count",
+          "type": "integer"
+        },
+        "dataset_version": {
+          "pattern": "^\\d+\\.\\d+\\.\\d+$",
+          "title": "Dataset Version",
+          "type": "string"
+        },
+        "evidence_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Evidence Sha256",
+          "type": "string"
+        },
+        "methodology_version": {
+          "pattern": "^\\d+\\.\\d+\\.\\d+$",
+          "title": "Methodology Version",
+          "type": "string"
+        },
+        "report_start": {
+          "format": "date",
+          "title": "Report Start",
+          "type": "string"
+        },
+        "report_through": {
+          "format": "date",
+          "title": "Report Through",
+          "type": "string"
+        },
+        "schema_version": {
+          "pattern": "^\\d+\\.\\d+\\.\\d+$",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "taxonomy_version": {
+          "pattern": "^\\d+\\.\\d+\\.\\d+$",
+          "title": "Taxonomy Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "dataset_version",
+        "methodology_version",
+        "taxonomy_version",
+        "schema_version",
+        "evidence_sha256",
+        "correction_count",
+        "report_start",
+        "report_through",
+        "collection_end"
+      ],
+      "title": "AnalysisProvenanceModel",
+      "type": "object"
+    }
+  },
+  "$id": "https://project-parallax.example/schemas/analysis-summary.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "allegation_qualification_counts": {
+      "$ref": "#/$defs/AllegationQualificationCounts"
+    },
+    "attributed_source_counts": {
+      "additionalProperties": {
+        "minimum": 0,
+        "type": "integer"
+      },
+      "title": "Attributed Source Counts",
+      "type": "object"
+    },
+    "claim_by_certainty": {
+      "additionalProperties": {
+        "additionalProperties": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "type": "object"
+      },
+      "title": "Claim By Certainty",
+      "type": "object"
+    },
+    "evidence_tier_counts": {
+      "additionalProperties": {
+        "minimum": 0,
+        "type": "integer"
+      },
+      "title": "Evidence Tier Counts",
+      "type": "object"
+    },
+    "evidence_tier_segment_counts": {
+      "additionalProperties": {
+        "minimum": 0,
+        "type": "integer"
+      },
+      "title": "Evidence Tier Segment Counts",
+      "type": "object"
+    },
+    "frame_duration_seconds": {
+      "additionalProperties": {
+        "minimum": 0,
+        "type": "number"
+      },
+      "title": "Frame Duration Seconds",
+      "type": "object"
+    },
+    "frame_segment_counts": {
+      "additionalProperties": {
+        "minimum": 0,
+        "type": "integer"
+      },
+      "title": "Frame Segment Counts",
+      "type": "object"
+    },
+    "loaded_language_term_counts": {
+      "additionalProperties": {
+        "minimum": 0,
+        "type": "integer"
+      },
+      "title": "Loaded Language Term Counts",
+      "type": "object"
+    },
+    "metric_version": {
+      "pattern": "^1\\.0\\.0$",
+      "title": "Metric Version",
+      "type": "string"
+    },
+    "notes": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Notes",
+      "type": "array"
+    },
+    "options": {
+      "$ref": "#/$defs/AnalysisOptionsModel"
+    },
+    "original_language_segment_counts": {
+      "additionalProperties": {
+        "minimum": 0,
+        "type": "integer"
+      },
+      "title": "Original Language Segment Counts",
+      "type": "object"
+    },
+    "outlet_record_counts": {
+      "additionalProperties": {
+        "minimum": 0,
+        "type": "integer"
+      },
+      "title": "Outlet Record Counts",
+      "type": "object"
+    },
+    "outlet_segment_counts": {
+      "additionalProperties": {
+        "minimum": 0,
+        "type": "integer"
+      },
+      "title": "Outlet Segment Counts",
+      "type": "object"
+    },
+    "packaging_support_counts": {
+      "additionalProperties": {
+        "minimum": 0,
+        "type": "integer"
+      },
+      "title": "Packaging Support Counts",
+      "type": "object"
+    },
+    "population": {
+      "$ref": "#/$defs/AnalysisPopulation"
+    },
+    "provenance": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/AnalysisProvenanceModel"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "review_state_counts": {
+      "additionalProperties": {
+        "minimum": 0,
+        "type": "integer"
+      },
+      "title": "Review State Counts",
+      "type": "object"
+    },
+    "segment_annotation_conflict_counts": {
+      "additionalProperties": {
+        "minimum": 0,
+        "type": "integer"
+      },
+      "title": "Segment Annotation Conflict Counts",
+      "type": "object"
+    },
+    "speaker_role_counts": {
+      "additionalProperties": {
+        "minimum": 0,
+        "type": "integer"
+      },
+      "title": "Speaker Role Counts",
+      "type": "object"
+    },
+    "speaker_role_duration_seconds": {
+      "additionalProperties": {
+        "minimum": 0,
+        "type": "number"
+      },
+      "title": "Speaker Role Duration Seconds",
+      "type": "object"
+    },
+    "stance_by_outlet_and_target_type": {
+      "additionalProperties": {
+        "additionalProperties": {
+          "additionalProperties": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "type": "object"
+        },
+        "type": "object"
+      },
+      "title": "Stance By Outlet And Target Type",
+      "type": "object"
+    },
+    "stance_by_target_actor": {
+      "additionalProperties": {
+        "additionalProperties": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "type": "object"
+      },
+      "title": "Stance By Target Actor",
+      "type": "object"
+    },
+    "stance_by_target_type": {
+      "additionalProperties": {
+        "additionalProperties": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "type": "object"
+      },
+      "title": "Stance By Target Type",
+      "type": "object"
+    },
+    "topic_duration_seconds": {
+      "additionalProperties": {
+        "minimum": 0,
+        "type": "number"
+      },
+      "title": "Topic Duration Seconds",
+      "type": "object"
+    },
+    "topic_record_counts": {
+      "additionalProperties": {
+        "minimum": 0,
+        "type": "integer"
+      },
+      "title": "Topic Record Counts",
+      "type": "object"
+    }
+  },
+  "required": [
+    "metric_version",
+    "options",
+    "provenance",
+    "population",
+    "review_state_counts",
+    "evidence_tier_counts",
+    "evidence_tier_segment_counts",
+    "stance_by_target_actor",
+    "stance_by_target_type",
+    "stance_by_outlet_and_target_type",
+    "speaker_role_counts",
+    "speaker_role_duration_seconds",
+    "outlet_record_counts",
+    "outlet_segment_counts",
+    "original_language_segment_counts",
+    "attributed_source_counts",
+    "topic_record_counts",
+    "topic_duration_seconds",
+    "frame_segment_counts",
+    "frame_duration_seconds",
+    "loaded_language_term_counts",
+    "claim_by_certainty",
+    "allegation_qualification_counts",
+    "packaging_support_counts",
+    "segment_annotation_conflict_counts",
+    "notes"
+  ],
+  "title": "AnalysisSummary",
+  "type": "object"
+}

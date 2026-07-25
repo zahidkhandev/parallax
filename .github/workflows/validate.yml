@@ -1,0 +1,38 @@
+name: Validate
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test-and-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install project and test tools
+        run: python -m pip install --upgrade pip && python -m pip install -e '.[dev]'
+      - name: Lint
+        run: python -m ruff check .
+      - name: Test
+        run: python -m pytest
+      - name: Check generated schema
+        run: python -m src schema
+      - name: Check analysis schema
+        run: python -m src analysis-schema
+      - name: Check controlled taxonomy
+        run: python -m src taxonomy
+      - name: Validate public evidence
+        run: python -m src validate
+      - name: Exercise aggregate pipeline
+        run: python -m src analyze --output "${RUNNER_TEMP}/parallax-metrics.json"
+      - name: Build rolling HTML report
+        run: python -m src report --output "${RUNNER_TEMP}/parallax-report.html"
+      - name: Record release readiness
+        run: python -m src readiness --output "${RUNNER_TEMP}/release-readiness.json"
