@@ -2,7 +2,7 @@ name: Generate machine evidence
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened]
+    types: [opened, reopened]
     paths:
       - "src/automated_evidence.py"
       - "tests/test_automated_evidence.py"
