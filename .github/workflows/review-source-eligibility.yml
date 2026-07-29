@@ -5,7 +5,7 @@ on:
     branches:
       - review/source-eligibility-2026-07-29
     paths:
-      - scripts/review_source_inventory.py
+      - scripts/run_inventory_review.py
 
 permissions:
   contents: write
@@ -37,7 +37,7 @@ jobs:
           python -m pip install googlenewsdecoder==0.1.7 requests beautifulsoup4 python-dateutil
 
       - name: Review every pending source
-        run: python scripts/review_source_inventory.py
+        run: python scripts/run_inventory_review.py
 
       - name: Validate inventory schema
         run: python -m src inventory-schema
