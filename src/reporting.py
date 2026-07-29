@@ -6,20 +6,32 @@ from __future__ import annotations
 from collections.abc import Iterable
 from html import escape
 from typing import Any
+from urllib.parse import urlencode
 
 from .analysis_models import AnalysisSummary
 from .analytics import AnalysisOptions, include_record
 from .models import CorrectionRecord, EvidenceSegment
 
 
-def _bar_table(title: str, values: dict[str, int | float], unit: str = "records") -> str:
+def _filter_link(label: str, **filters: str) -> str:
+    query = urlencode(filters)
+    text = escape(label.replace("_", " ").title())
+    return f"<a href='?{escape(query, quote=True)}#evidence'>{text}</a>"
+
+
+def _bar_table(
+    title: str,
+    values: dict[str, int | float],
+    unit: str = "records",
+    filter_key: str | None = None,
+) -> str:
     maximum = max(values.values(), default=0)
     rows = []
     for label, value in sorted(values.items(), key=lambda item: (-item[1], item[0])):
         width = (float(value) / float(maximum) * 100) if maximum else 0
         rows.append(
             "<tr><th scope='row'>"
-            f"{escape(label.replace('_', ' ').title())}</th><td>{value:g} {escape(unit)}</td>"
+            f"{_filter_link(label, **{filter_key: label}) if filter_key else escape(label.replace('_', ' ').title())}</th><td>{value:g} {escape(unit)}</td>"
             f"<td class='bar-cell'><span style='width:{width:.2f}%'></span></td></tr>"
         )
     if not rows:
@@ -36,8 +48,8 @@ def _stance_rows(summary: AnalysisSummary) -> str:
     for target, stances in sorted(summary.stance_by_target_type.items()):
         for stance, count in sorted(stances.items()):
             rows.append(
-                f"<tr><th scope='row'>{escape(target.replace('_', ' ').title())}</th>"
-                f"<td>{escape(stance.replace('_', ' '))}</td><td>{count}</td></tr>"
+                f"<tr><th scope='row'>{_filter_link(target, target=target, stance=stance)}</th>"
+                f"<td>{_filter_link(stance, target=target, stance=stance)}</td><td>{count}</td></tr>"
             )
     if not rows:
         rows.append("<tr><td colspan='3' class='empty'>No reviewed stance records yet.</td></tr>")
@@ -63,6 +75,11 @@ def _evidence_explorer(records: Iterable[EvidenceSegment]) -> str:
                 record.target_actor.name,
                 record.target_actor.actor_type.value,
                 record.stance.value,
+                " ".join(topic.value for topic in record.topic_labels),
+                " ".join(frame.value for frame in record.frame_labels),
+                record.claim_type.value,
+                record.certainty.value,
+                record.packaging_support.value,
                 excerpt,
             )
         ).casefold()
@@ -70,7 +87,9 @@ def _evidence_explorer(records: Iterable[EvidenceSegment]) -> str:
             f"<tr class='evidence-row' data-search='{escape(search, quote=True)}' "
             f"data-stance='{escape(record.stance.value, quote=True)}' "
             f"data-tier='{escape(record.evidence_tier.value, quote=True)}' "
-            f"data-review='{escape(record.review_status.value, quote=True)}'>"
+            f"data-review='{escape(record.review_status.value, quote=True)}' "
+            f"data-target='{escape(record.target_actor.actor_type.value, quote=True)}' "
+            f"data-speaker='{escape(record.speaker.role.value, quote=True)}'>"
             f"<td><a href='{escape(str(record.source_url), quote=True)}' rel='noopener noreferrer'>"
             f"{escape(record.outlet)}</a><br><small>{escape(record.title)}</small></td>"
             f"<td>{_timestamp(record.segment_start_seconds)}–{_timestamp(record.segment_end_seconds)}</td>"
@@ -157,23 +176,25 @@ code{{overflow-wrap:anywhere}} @media print{{body{{background:white}} section,.c
 <div class="card"><span>Spoken material</span><strong>{population.included_spoken_duration_seconds:g}s</strong></div></div>
 <section><h2>Targeted stance</h2><p class="muted">Counts are target-specific evidence records, not verdicts about truth or intent.</p>
 <table><thead><tr><th>Target actor type</th><th>Stance</th><th>Records</th></tr></thead><tbody>{_stance_rows(summary)}</tbody></table></section>
-{_bar_table('Topic attention — distinct spoken segments', summary.topic_duration_seconds, 'seconds')}
-{_bar_table('Speaker representation — distinct spoken segments', summary.speaker_role_duration_seconds, 'seconds')}
-{_bar_table('Evidence quality — distinct segments', summary.evidence_tier_segment_counts, 'segments')}
-{_bar_table('Claim type and certainty', {f'{claim} / {certainty}': count for claim, values in summary.claim_by_certainty.items() for certainty, count in values.items()}, 'segments')}
-{_bar_table('Packaging support', summary.packaging_support_counts, 'segments')}
-{_bar_table('Review states', summary.review_state_counts, 'records')}
+{_bar_table('Topic attention — distinct spoken segments', summary.topic_duration_seconds, 'seconds', 'search')}
+{_bar_table('Speaker representation — distinct spoken segments', summary.speaker_role_duration_seconds, 'seconds', 'speaker')}
+{_bar_table('Evidence quality — distinct segments', summary.evidence_tier_segment_counts, 'segments', 'tier')}
+{_bar_table('Claim type and certainty', {f'{claim} / {certainty}': count for claim, values in summary.claim_by_certainty.items() for certainty, count in values.items()}, 'segments', 'search')}
+{_bar_table('Packaging support', summary.packaging_support_counts, 'segments', 'search')}
+{_bar_table('Review states', summary.review_state_counts, 'records', 'review')}
 {_bar_table('Annotation conflicts', summary.segment_annotation_conflict_counts, 'segments')}
 <section id="evidence"><h2>Timestamped evidence explorer</h2><p class="muted">A guest remains attributed to the guest; target actors and editorial speakers are displayed separately. Excerpts are limited public evidence, not complete transcripts.</p>
 <div class="filters"><label>Search<input id="evidence-search" type="search" placeholder="Outlet, speaker, target, excerpt"></label>
 <label>Stance<select id="stance-filter"><option value="">All</option>{''.join(f'<option value="{escape(value, quote=True)}">{escape(value.replace("_", " "))}</option>' for value in ('favourable','critical','neutral_descriptive','mixed','unclear','insufficient_evidence'))}</select></label>
 <label>Tier<select id="tier-filter"><option value="">All</option>{''.join(f'<option value="{tier}">{tier}</option>' for tier in ('A','B','C','D'))}</select></label>
-<label>Review<select id="review-filter"><option value="">All</option>{''.join(f'<option value="{value}">{escape(value.replace("_", " "))}</option>' for value in ('machine_only','human_reviewed','second_reviewed','rejected'))}</select></label></div>
+<label>Review<select id="review-filter"><option value="">All</option>{''.join(f'<option value="{value}">{escape(value.replace("_", " "))}</option>' for value in ('machine_only','human_reviewed','second_reviewed','rejected'))}</select></label>
+<label>Target type<select id="target-filter"><option value="">All</option>{''.join(f'<option value="{escape(value, quote=True)}">{escape(value.replace("_", " "))}</option>' for value in sorted(summary.stance_by_target_type))}</select></label>
+<label>Speaker role<select id="speaker-filter"><option value="">All</option>{''.join(f'<option value="{escape(value, quote=True)}">{escape(value.replace("_", " "))}</option>' for value in sorted(summary.speaker_role_duration_seconds))}</select></label></div>
 <p id="filter-status" role="status">Showing {len(visible_records)} evidence record(s).</p>
 <table class="evidence-table"><thead><tr><th>Source</th><th>Timestamp</th><th>Speaker</th><th>Target actor</th><th>Stance</th><th>Limited excerpt</th><th>Evidence / review</th></tr></thead><tbody>{_evidence_explorer(visible_records)}</tbody></table></section>
 <section id="corrections"><h2>Correction history</h2><table><thead><tr><th>Correction</th><th>Record</th><th>Field</th><th>Corrected at</th><th>Reason</th><th>Metrics affected</th></tr></thead><tbody>{_correction_rows(corrections)}</tbody></table></section>
 <section><h2>Reproducibility</h2><p>Dataset <strong>{escape(provenance.dataset_version)}</strong>; methodology {escape(provenance.methodology_version)}; taxonomy {escape(provenance.taxonomy_version)}; evidence schema {escape(provenance.schema_version)}.</p>
 <p>Evidence SHA-256: <code>{escape(provenance.evidence_sha256)}</code>. Validated corrections: {provenance.correction_count}.</p></section>
 </main><footer>Project Parallax · Politically neutral, evidence-first analysis · Topic durations may be non-exclusive.</footer>
-<script>(()=>{{const rows=[...document.querySelectorAll('.evidence-row')],q=document.querySelector('#evidence-search'),stance=document.querySelector('#stance-filter'),tier=document.querySelector('#tier-filter'),review=document.querySelector('#review-filter'),status=document.querySelector('#filter-status');function apply(){{let shown=0;for(const row of rows){{const visible=(!q.value||row.dataset.search.includes(q.value.toLocaleLowerCase()))&&(!stance.value||row.dataset.stance===stance.value)&&(!tier.value||row.dataset.tier===tier.value)&&(!review.value||row.dataset.review===review.value);row.hidden=!visible;if(visible)shown++}}status.textContent=`Showing ${{shown}} evidence record(s).`}}for(const control of [q,stance,tier,review])control.addEventListener('input',apply)}})();</script>
+<script>(()=>{{const rows=[...document.querySelectorAll('.evidence-row')],q=document.querySelector('#evidence-search'),stance=document.querySelector('#stance-filter'),tier=document.querySelector('#tier-filter'),review=document.querySelector('#review-filter'),target=document.querySelector('#target-filter'),speaker=document.querySelector('#speaker-filter'),status=document.querySelector('#filter-status'),params=new URLSearchParams(location.search);q.value=params.get('search')||'';stance.value=params.get('stance')||'';tier.value=params.get('tier')||'';review.value=params.get('review')||'';target.value=params.get('target')||'';speaker.value=params.get('speaker')||'';function apply(){{let shown=0;for(const row of rows){{const visible=(!q.value||row.dataset.search.includes(q.value.toLocaleLowerCase()))&&(!stance.value||row.dataset.stance===stance.value)&&(!tier.value||row.dataset.tier===tier.value)&&(!review.value||row.dataset.review===review.value)&&(!target.value||row.dataset.target===target.value)&&(!speaker.value||row.dataset.speaker===speaker.value);row.hidden=!visible;if(visible)shown++}}status.textContent=`Showing ${{shown}} evidence record(s).`}}for(const control of [q,stance,tier,review,target,speaker])control.addEventListener('input',apply);apply()}})();</script>
 </body></html>"""

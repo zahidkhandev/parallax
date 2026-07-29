@@ -44,7 +44,8 @@ This roadmap separates implemented repository infrastructure from research work 
 - [ ] Add uncertainty intervals and suppression rules suitable for the final sampling design.
 - [x] Build a dependency-free accessible rolling summary report with an honest empty state.
 - [x] Add the interactive timestamped evidence explorer, source links, record filters, and correction history.
-- [ ] Link charts to evidence, methodology versions, and correction history.
+- [x] Link chart categories to filtered evidence; expose methodology versions and correction history.
+- [x] Add a deterministic structural accessibility gate for generated reports.
 
 ## Phase 5 — Reproducible releases
 

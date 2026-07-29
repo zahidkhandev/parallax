@@ -53,6 +53,12 @@ def test_report_renders_attribution_timestamp_filters_and_corrections() -> None:
     assert "Reason &lt;script&gt;alert(&#x27;reason&#x27;)&lt;/script&gt;" in html
     assert "<script>alert('title')</script>" not in html
     assert "id=\"stance-filter\"" in html
+    assert "id=\"target-filter\"" in html
+    assert "id=\"speaker-filter\"" in html
+    assert "data-target='education_exam_authority'" in html
+    assert "data-speaker='guest'" in html
+    assert "?target=education_exam_authority&amp;stance=neutral_descriptive#evidence" in html
+    assert "new URLSearchParams(location.search)" in html
     assert "cor-example-001" in html
 
 

@@ -38,6 +38,8 @@ jobs:
         run: python -m src analyze --output "${RUNNER_TEMP}/parallax-metrics.json"
       - name: Build rolling HTML report
         run: python -m src report --output "${RUNNER_TEMP}/parallax-report.html"
+      - name: Audit report accessibility
+        run: python -m src accessibility --report "${RUNNER_TEMP}/parallax-report.html" --output "${RUNNER_TEMP}/accessibility.json" --require-pass
       - name: Record release readiness
         run: python -m src readiness --output "${RUNNER_TEMP}/release-readiness.json"
       - name: Build reliability report

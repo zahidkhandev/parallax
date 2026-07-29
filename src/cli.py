@@ -13,6 +13,7 @@ from datetime import date
 from pathlib import Path
 from typing import Any
 
+from .accessibility import audit_html
 from .analysis_models import (
     DEFAULT_ANALYSIS_SCHEMA,
     canonical_analysis_schema,
@@ -233,6 +234,13 @@ def build_parser() -> argparse.ArgumentParser:
     bundle.add_argument("--reliability", type=Path, default=DEFAULT_RELIABILITY_DATA)
     bundle.add_argument("--output", type=Path, required=True)
     bundle.add_argument("--draft", action="store_true")
+
+    accessibility = subparsers.add_parser(
+        "accessibility", help="audit structural accessibility of a generated report"
+    )
+    accessibility.add_argument("--report", type=Path, required=True)
+    accessibility.add_argument("--output", type=Path, required=True)
+    accessibility.add_argument("--require-pass", action="store_true")
     return parser
 
 
@@ -376,6 +384,13 @@ def run(argv: Sequence[str] | None = None) -> int:
             )
             state = "draft" if bundle_manifest["draft"] else "release"
             print(f"Wrote {state} bundle with {bundle_manifest['artifact_count']} artifact(s).")
+        elif args.command == "accessibility":
+            audit = audit_html(args.report)
+            write_json_atomic(args.output, audit)
+            state = "passed" if audit["passed"] else "failed"
+            print(f"Accessibility audit {state}; wrote {args.output}.")
+            if args.require_pass and not audit["passed"]:
+                return 2
     except (OSError, PublicDataValidationError, BundleBuildError) as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 1

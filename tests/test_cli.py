@@ -16,6 +16,7 @@ def test_validate_and_analyze_commands(tmp_path: Path) -> None:
     corrections = tmp_path / "corrections.csv"
     output = tmp_path / "metrics.json"
     report = tmp_path / "report.html"
+    accessibility = tmp_path / "accessibility.json"
     readiness = tmp_path / "readiness.json"
     inventory = tmp_path / "inventory.jsonl"
     inventory_schema = tmp_path / "inventory-schema.json"
@@ -88,6 +89,20 @@ def test_validate_and_analyze_commands(tmp_path: Path) -> None:
     html = report.read_text(encoding="utf-8")
     assert "01 May 2026 through 31 May 2026" in html
     assert "Targeted stance" in html
+    assert (
+        run(
+            [
+                "accessibility",
+                "--report",
+                str(report),
+                "--output",
+                str(accessibility),
+                "--require-pass",
+            ]
+        )
+        == 0
+    )
+    assert json.loads(accessibility.read_text())["passed"] is True
     assert run(["readiness", *common, "--output", str(readiness)]) == 0
     assert json.loads(readiness.read_text())["ready"] is False
     assert (
