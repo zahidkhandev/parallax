@@ -23,11 +23,13 @@ dependencies = ["jsonschema[format]>=4.22,<5", "pydantic>=2.7,<3"]
 dev = ["pytest>=8,<9", "ruff>=0.5,<1"]
 transcripts = ["youtube-transcript-api>=1.2.4,<2"]
 asr = ["faster-whisper>=1.2.1,<2"]
+media = ["yt-dlp[default]>=2026.7.4,<2027"]
 
 [project.scripts]
 parallax = "src.cli:main"
 parallax-validate = "src.validate_public_data:main"
 parallax-transcripts = "src.transcript_evidence:main"
+parallax-media = "src.media_acquisition:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src"]
