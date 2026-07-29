@@ -1,11 +1,13 @@
 name: Review source eligibility
 
 on:
-  push:
+  pull_request:
     branches:
-      - review/source-eligibility-2026-07-29
-    paths:
-      - scripts/run_inventory_review.py
+      - main
+    types:
+      - opened
+      - reopened
+      - synchronize
 
 permissions:
   contents: write
@@ -16,12 +18,16 @@ concurrency:
 
 jobs:
   review:
+    if: >-
+      github.event.pull_request.head.ref == 'review/source-eligibility-2026-07-29' &&
+      github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     timeout-minutes: 90
     steps:
       - name: Check out eligibility-review branch
         uses: actions/checkout@v4
         with:
+          ref: ${{ github.event.pull_request.head.ref }}
           fetch-depth: 0
 
       - name: Set up Python
@@ -65,4 +71,4 @@ jobs:
             exit 0
           fi
           git commit -m "Review first source discovery candidates"
-          git push origin "HEAD:${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_HEAD_REF}"
