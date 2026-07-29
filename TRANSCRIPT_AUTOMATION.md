@@ -8,7 +8,7 @@ publishing complete transcripts or downloaded media.
 `python -m src.transcript_evidence`:
 
 1. selects sources already marked `included` and `available`;
-2. prefers a local timed transcript in `private-workspace/transcripts/`;
+2. prefers a local timed transcript in the private workspace;
 3. can retrieve public YouTube captions or publisher `<track>` captions with `--network`;
 4. can run Faster-Whisper over lawfully obtained local media with `--local-asr`;
 5. groups adjacent cues into bounded context windows;
@@ -39,39 +39,66 @@ The `Generate transcript evidence` workflow performs this caption-first run. Net
 failures, disabled captions, inaccessible pages and sources without timed text are
 reported rather than silently omitted.
 
-## Local ASR fallback
+The first hosted pilot attempted 25 included audiovisual sources. No usable timed
+caption was acquired: publisher pages exposed no directly usable caption tracks and
+YouTube rejected requests from the GitHub-hosted datacenter IP. This is why the
+self-hosted fallback below is required for the current collection.
 
-Put lawfully obtained media in:
+## Self-hosted acquisition and ASR
 
-```text
-private-workspace/media/<source_id>.<wav|mp3|m4a|mp4|webm|mkv|mov|ogg|flac>
-```
+The `Transcribe media on self-hosted runner` workflow is manually dispatched and runs
+only on a runner carrying the label `parallax-transcriber`. Register a Linux or macOS
+self-hosted GitHub Actions runner, add that custom label, and keep its working directory
+private.
 
-Then run on a machine with sufficient CPU/GPU resources:
+The workflow:
+
+1. tries subtitle and automatic-caption acquisition with yt-dlp;
+2. optionally downloads bounded audio when captions are unavailable;
+3. keeps all third-party media and complete captions outside the repository checkout;
+4. runs Faster-Whisper locally;
+5. generates Tier D, `machine_only` spoken evidence;
+6. validates all public records; and
+7. opens a separate evidence pull request only when public evidence changed.
+
+Audio downloading is disabled by default and must be explicitly selected when manually
+dispatching the workflow. Use it only where acquisition and private research use are
+lawful. Browser cookies are optional and stay on the self-hosted machine.
+
+## Equivalent local commands
 
 ```bash
-python -m pip install -e '.[dev,transcripts,asr]'
+python -m pip install -e '.[dev,transcripts,asr,media]'
+python -m src.media_acquisition \
+  --as-of 2026-07-29 \
+  --download-audio \
+  --cookies-from-browser chrome \
+  --report build/media-acquisition-report.json
 python -m src.transcript_evidence \
   --as-of 2026-07-29 \
   --network \
   --local-asr \
+  --private-root private-workspace/transcripts \
   --whisper-model small \
   --whisper-device cpu \
-  --whisper-compute-type int8
+  --whisper-compute-type int8 \
+  --report build/transcript-evidence-report.json
 ```
 
-For an NVIDIA GPU, use a compatible local CUDA setup and typically select
+Omit `--cookies-from-browser` when it is unnecessary. For an NVIDIA GPU, use a
+compatible local CUDA setup and typically select
 `--whisper-device cuda --whisper-compute-type float16`.
 
-## Local caption formats
+## Local caption and media formats
 
-The pipeline accepts:
+The transcript pipeline accepts:
 
 ```text
 private-workspace/transcripts/<source_id>.jsonl
 private-workspace/transcripts/<source_id>.json
 private-workspace/transcripts/<source_id>.vtt
 private-workspace/transcripts/<source_id>.srt
+private-workspace/media/<source_id>.<wav|mp3|m4a|mp4|webm|mkv|mov|ogg|flac>
 ```
 
 A JSONL cue may contain:
@@ -91,5 +118,5 @@ frame. Therefore:
 - generated spoken records remain `machine_only`;
 - unverified speaker attribution uses Tier D;
 - default analytics continue to exclude these records;
-- the generation report must accompany exploratory machine-only metrics; and
+- the generation and acquisition reports accompany exploratory metrics; and
 - no machine-only record should be presented as a confirmed allegation or outlet verdict.
