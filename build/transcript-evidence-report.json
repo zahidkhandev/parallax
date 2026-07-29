@@ -1,0 +1,152 @@
+{
+  "acquired_source_count": 0,
+  "by_acquisition_method": {},
+  "by_stance": {},
+  "by_target_actor_type": {},
+  "by_transcript_language": {},
+  "candidate_source_count": 25,
+  "failed_source_count": 25,
+  "failures": [
+    {
+      "reason": "RuntimeError: no usable timed caption track found",
+      "source_id": "src-ac5d7544b6672deb5027",
+      "source_url": "https://www.borderlens.com/2026/07/21/neet-scandal-sparks-nationwide-anger-as-jantar-mantar-protest-reaches-shillong/"
+    },
+    {
+      "reason": "RuntimeError: no usable timed caption track found",
+      "source_id": "src-f70998d9ee0e645c8044",
+      "source_url": "https://www.etvbharat.com/en/videos/watch-live-congress-leader-rahul-gandhi-press-conference-in-new-delhi-cjp-neet-protest-jantar-mantar-dharmendra-pradhan-enn26072204293"
+    },
+    {
+      "reason": "RuntimeError: no usable timed caption track found",
+      "source_id": "src-cbdf036628f564724cb7",
+      "source_url": "https://www.livemint.com/videos/pm-modis-explosive-response-to-neet-paper-leak-row-fast-track-courts-cjp-protest-news-11784788317768.html"
+    },
+    {
+      "reason": "RuntimeError: no usable timed caption track found",
+      "source_id": "src-974ac856a72c03647087",
+      "source_url": "https://www.etvbharat.com/hi/state/neet-paper-leak-2026-demand-for-resignation-of-education-minister-dharmendra-pradhan-congress-protests-continue-across-state-cts26072304507"
+    },
+    {
+      "reason": "RuntimeError: no usable timed caption track found",
+      "source_id": "src-331f1ffcd28b22b249f4",
+      "source_url": "https://www.etvbharat.com/hi/state/congress-endangered-constitution-political-parties-have-infiltrated-students-movement-bjp-cts26072305243"
+    },
+    {
+      "reason": "RuntimeError: no usable timed caption track found",
+      "source_id": "src-918b0fc94984d24a23cd",
+      "source_url": "https://www.aljazeera.com/news/2026/7/24/indian-student-protests-whats-next-after-modis-promise-on-exam-leaks"
+    },
+    {
+      "reason": "RuntimeError: no usable timed caption track found",
+      "source_id": "src-2f9e33022e74b0859263",
+      "source_url": "https://telanganatoday.com/neet-ug-paper-leak-student-protests-disrupt-hyderabad-demand-dharmendra-pradhans-resignation"
+    },
+    {
+      "reason": "RuntimeError: no usable timed caption track found",
+      "source_id": "src-2d721e887e0bf1650742",
+      "source_url": "https://www.etvbharat.com/hi/bharat/the-biggest-political-battle-over-the-neet-exam-controversy-why-has-congress-joined-the-cjps-movement-when-will-the-deadlock-end-hin26072306923"
+    },
+    {
+      "reason": "RequestBlocked: \nCould not retrieve a transcript for the video https://www.youtube.com/watch?v=X6s8wSyzZfc! This is most likely caused by:\n\nYouTube is blocking requests from your IP. This usually is due to one of the following reasons:\n- You have done too many requests and your IP has been blocked by YouTube\n- You ",
+      "source_id": "src-077dee8447a03c7aba91",
+      "source_url": "https://www.freepressjournal.in/mumbai/over-5000-join-student-led-tricolour-protest-at-mumbais-shivaji-park-demanding-education-reforms"
+    },
+    {
+      "reason": "RequestBlocked: \nCould not retrieve a transcript for the video https://www.youtube.com/watch?v=iPiyKwfY2yA! This is most likely caused by:\n\nYouTube is blocking requests from your IP. This usually is due to one of the following reasons:\n- You have done too many requests and your IP has been blocked by YouTube\n- You ",
+      "source_id": "src-648ea85996c4729dcd93",
+      "source_url": "https://www.newslaundry.com/2026/07/25/tv-newsance-348-neet-protest-ya-cia-plot-godi-medias-4-step-formula-exposed"
+    },
+    {
+      "reason": "RuntimeError: no usable timed caption track found",
+      "source_id": "src-2bbaf5acbf443f81bdec",
+      "source_url": "https://www.etvbharat.com/hi/state/congress-state-president-ajay-rai-attacks-the-bjp-government-in-prayagraj-ups26072500485"
+    },
+    {
+      "reason": "RuntimeError: no usable timed caption track found",
+      "source_id": "src-0a56bb301e173934f849",
+      "source_url": "https://www.livemint.com/videos/cjp-protests-why-neet-paper-leak-was-the-tipping-point-a-ground-report-from-jantar-mantar-11784953704065.html"
+    },
+    {
+      "reason": "RuntimeError: no usable timed caption track found",
+      "source_id": "src-7f3eaf83c1d564a552a0",
+      "source_url": "https://www.etvbharat.com/en/videos/watch-rahul-gandhi-addresses-in-special-breifing-enn26072501874"
+    },
+    {
+      "reason": "RuntimeError: no usable timed caption track found",
+      "source_id": "src-384e5dee03ccb2b8e02d",
+      "source_url": "https://www.aajtak.in/india/delhi/story/dharmendra-pradhan-resigns-education-minister-resign-cjp-protest-ntc-mnrd-dskc-2608865-2026-07-25"
+    },
+    {
+      "reason": "RuntimeError: no usable timed caption track found",
+      "source_id": "src-1b800b78efede1470828",
+      "source_url": "https://www.etvbharat.com/hi/state/neet-ug-paper-leak-2026-bhim-army-protests-at-ambedkar-chowk-raipur-cts26072503635"
+    },
+    {
+      "reason": "RequestBlocked: \nCould not retrieve a transcript for the video https://www.youtube.com/watch?v=OG2bHVa4hYI! This is most likely caused by:\n\nYouTube is blocking requests from your IP. This usually is due to one of the following reasons:\n- You have done too many requests and your IP has been blocked by YouTube\n- You ",
+      "source_id": "src-3ca9c9b8de8dddea7bb5",
+      "source_url": "https://www.freepressjournal.in/education/neet-paper-leak-victims-families-see-dharmendra-pradhans-resignation-as-step-but-insist-justice-and-reforms-are-far-from-over"
+    },
+    {
+      "reason": "RequestBlocked: \nCould not retrieve a transcript for the video https://www.youtube.com/watch?v=OG2bHVa4hYI! This is most likely caused by:\n\nYouTube is blocking requests from your IP. This usually is due to one of the following reasons:\n- You have done too many requests and your IP has been blocked by YouTube\n- You ",
+      "source_id": "src-be9cd8403c4ff62db461",
+      "source_url": "https://www.freepressjournal.in/education/mamata-banerjee-joins-padmapukur-neet-protest-after-calcutta-hc-denies-rally-permission-slams-police-on-scooter-visit"
+    },
+    {
+      "reason": "RuntimeError: no usable timed caption track found",
+      "source_id": "src-649b68091db2092c684d",
+      "source_url": "https://www.bhaskar.com/g/national/news/india-paper-leak-scandal-mafia-network-exam-fraud-update-138542812.html"
+    },
+    {
+      "reason": "RuntimeError: no usable timed caption track found",
+      "source_id": "src-ed0a861f403066629cb3",
+      "source_url": "https://www.livemint.com/videos/neet-protests-fallout-centre-introduces-tougher-anti-paper-leak-bill-what-does-it-change-11785143705424.html"
+    },
+    {
+      "reason": "RuntimeError: no usable timed caption track found",
+      "source_id": "src-f18016ed0e80001b783e",
+      "source_url": "https://www.livemint.com/videos/neet-row-kapil-sibal-announces-rs-1-cr-aid-website-linking-lawyers-to-cjp-protesters-11785167262706.html"
+    },
+    {
+      "reason": "RuntimeError: no usable timed caption track found",
+      "source_id": "src-94ccd784ce4d7400e506",
+      "source_url": "https://www.livemint.com/videos/neet-protest-under-scanner-delhi-police-identifies-2-873-with-criminal-antecedents-full-report-11785224888047.html"
+    },
+    {
+      "reason": "RuntimeError: no usable timed caption track found",
+      "source_id": "src-152b2d1ca0104cba3502",
+      "source_url": "https://www.livemint.com/videos/bihar-cop-suspended-after-firing-ak-47-during-student-protest-over-neet-paper-leak-watch-11785224973982.html"
+    },
+    {
+      "reason": "RuntimeError: no usable timed caption track found",
+      "source_id": "src-74b4317863b8f4878cf8",
+      "source_url": "https://www.bhaskar.com/local/uttar-pradesh/prayagraj/news/prayagraj-cav-college-medhavi-samman-smaroh-neet-inspire-update-138565566.html"
+    },
+    {
+      "reason": "RuntimeError: no usable timed caption track found",
+      "source_id": "src-4238b6b57928cc15b5d5",
+      "source_url": "https://www.thehindu.com/videos/watch-document-reveals-delhi-police-approved-pellet-gun-use-at-neet-protest-above-the-fold-28072026/article71277763.ece"
+    },
+    {
+      "reason": "RuntimeError: no usable timed caption track found",
+      "source_id": "src-aa63ebf3952593f0e052",
+      "source_url": "https://www.etvbharat.com/en/bharat/congress-leader-rahul-gandhi-on-paper-leak-protest-in-lok-sabha-enn26072903059"
+    }
+  ],
+  "generated_at": "2026-07-29T11:38:07.750163+00:00",
+  "generated_record_count": 0,
+  "limitations": [
+    "Automated captions and ASR can contain omissions, hallucinations and timing errors.",
+    "Speaker diarisation and identity are not verified; generated evidence uses Tier D.",
+    "Rules can misidentify targets, quotation boundaries, stance, topics and frames.",
+    "Only short excerpts and transcript hashes are public; complete transcripts stay private.",
+    "Every generated record remains machine_only and is excluded from default analytics."
+  ],
+  "preserved_record_count": 634,
+  "report_through": "2026-07-29",
+  "skipped_no_explicit_target_count": 0,
+  "skipped_no_explicit_target_source_ids": [],
+  "source_count_with_generated_records": 0,
+  "total_evidence_record_count": 634,
+  "transcript_evidence_version": "1.0.0"
+}
