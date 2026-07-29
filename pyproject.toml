@@ -1,23 +1,41 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
 [project]
 name = "neet-protest-2026-media-analysis"
 version = "0.1.0"
-description = "Evidence-first media framing analysis for the NEET 2026 protests"
+description = "Neutral, evidence-first analysis of media coverage connected to the NEET 2026 protests"
+readme = "README.md"
 requires-python = ">=3.11"
-dependencies = [
-  "pydantic>=2.7,<3",
-  "pandas>=2.2,<3",
-  "pyarrow>=16,<20",
+license = {file = "LICENSE"}
+authors = [{name = "Project Parallax contributors"}]
+classifiers = [
+  "Development Status :: 2 - Pre-Alpha",
+  "License :: OSI Approved :: Apache Software License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Topic :: Scientific/Engineering :: Information Analysis",
 ]
+dependencies = ["jsonschema[format]>=4.22,<5", "pydantic>=2.7,<3"]
 
 [project.optional-dependencies]
-dev = [
-  "pytest>=8,<9",
-  "ruff>=0.5,<1",
-  "jsonschema>=4.22,<5",
-]
+dev = ["pytest>=8,<9", "ruff>=0.5,<1"]
+
+[project.scripts]
+parallax = "src.cli:main"
+parallax-validate = "src.validate_public_data:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+addopts = "--strict-markers --strict-config"
 
 [tool.ruff]
 line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]

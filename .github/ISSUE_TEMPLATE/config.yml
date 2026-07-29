@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Corrections policy
+    url: https://github.com/project-parallax/neet-protest-2026-media-analysis/blob/main/CORRECTIONS.md
+    about: Read the correction and appeal process before reporting a published-data problem.

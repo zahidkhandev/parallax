@@ -1,0 +1,116 @@
+{
+  "actor_types": [
+    "protest_organiser",
+    "student_candidate",
+    "parent",
+    "government_representative",
+    "education_exam_authority",
+    "police",
+    "ruling_party",
+    "opposition_party",
+    "court_public_institution",
+    "anchor_correspondent",
+    "guest_expert",
+    "other_relevant_actor"
+  ],
+  "certainty_treatments": [
+    "explicitly_qualified",
+    "implicitly_qualified",
+    "asserted_as_fact",
+    "contested",
+    "unclear"
+  ],
+  "claim_types": [
+    "observed_fact",
+    "verified_fact",
+    "reported_allegation",
+    "speaker_allegation",
+    "opinion",
+    "question",
+    "speculation",
+    "prediction",
+    "quotation",
+    "unclear"
+  ],
+  "event_scope": "NEET 2026 protests",
+  "evidence_kinds": [
+    "spoken",
+    "headline",
+    "thumbnail",
+    "description",
+    "ticker",
+    "other_packaging"
+  ],
+  "evidence_tiers": {
+    "A": "timestamped spoken evidence with verified source and speaker",
+    "B": "exact reliable quotation or attribution without complete audiovisual verification",
+    "C": "headline, thumbnail, description, or packaging evidence only",
+    "D": "mixed stream, unresolved identity, or insufficient attribution"
+  },
+  "frame_labels": [
+    "legitimising",
+    "delegitimising",
+    "criminalising",
+    "victimising",
+    "heroising",
+    "law_and_order",
+    "civil_rights",
+    "institutional_accountability",
+    "institutional_trust",
+    "public_disruption",
+    "electoral_political",
+    "procedural_legal",
+    "human_interest",
+    "evidence_verification",
+    "other"
+  ],
+  "packaging_support": [
+    "supported_by_body",
+    "partially_supported",
+    "unsupported_in_reviewed_portion",
+    "contradicted_by_body",
+    "insufficient_transcript",
+    "not_reviewed",
+    "not_applicable"
+  ],
+  "review_states": [
+    "machine_only",
+    "human_reviewed",
+    "second_reviewed",
+    "rejected"
+  ],
+  "speaker_roles": [
+    "anchor",
+    "correspondent",
+    "guest",
+    "expert",
+    "interviewee",
+    "voiceover",
+    "quoted_source",
+    "institutional_statement",
+    "unknown",
+    "not_applicable"
+  ],
+  "stance_values": [
+    "favourable",
+    "critical",
+    "neutral_descriptive",
+    "mixed",
+    "unclear",
+    "insufficient_evidence"
+  ],
+  "topic_labels": [
+    "protest_demands",
+    "student_candidate_experience",
+    "parent_response",
+    "examination_administration",
+    "government_response",
+    "policing_public_order",
+    "party_politics",
+    "courts_legal_process",
+    "public_disruption",
+    "evidence_verification",
+    "other_relevant"
+  ],
+  "version": "1.0.0"
+}

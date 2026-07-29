@@ -1,0 +1,62 @@
+{
+  "allegation_qualification_counts": {
+    "conflicting_annotations": 0,
+    "qualified": 0,
+    "total_allegations": 0,
+    "unqualified": 0
+  },
+  "attributed_source_counts": {},
+  "claim_by_certainty": {},
+  "evidence_tier_counts": {},
+  "evidence_tier_segment_counts": {},
+  "frame_duration_seconds": {},
+  "frame_segment_counts": {},
+  "loaded_language_term_counts": {},
+  "metric_version": "1.0.0",
+  "notes": [
+    "Counts describe included evidence segments, not truth, motive, or character.",
+    "Target, speaker, and source dimensions remain separate.",
+    "No composite or universal bias score is calculated.",
+    "Topic durations are non-exclusive when a segment has multiple topic labels.",
+    "Coverage metrics deduplicate source URL, evidence kind, and exact timestamps.",
+    "Stance metrics retain separate records because every stance has one target actor."
+  ],
+  "options": {
+    "include_machine_only": false,
+    "include_rejected": false
+  },
+  "original_language_segment_counts": {},
+  "outlet_record_counts": {},
+  "outlet_segment_counts": {},
+  "packaging_support_counts": {},
+  "population": {
+    "additional_target_records": 0,
+    "all_records": 0,
+    "excluded_records": 0,
+    "human_review_coverage": null,
+    "included_distinct_segments": 0,
+    "included_records": 0,
+    "included_spoken_duration_seconds": 0.0,
+    "reviewed_records": 0
+  },
+  "provenance": {
+    "collection_end": null,
+    "correction_count": 0,
+    "dataset_version": "0.1.0",
+    "evidence_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "methodology_version": "1.0.0",
+    "report_start": "2026-07-01",
+    "report_through": "2026-07-29",
+    "schema_version": "1.0.0",
+    "taxonomy_version": "1.0.0"
+  },
+  "review_state_counts": {},
+  "segment_annotation_conflict_counts": {},
+  "speaker_role_counts": {},
+  "speaker_role_duration_seconds": {},
+  "stance_by_outlet_and_target_type": {},
+  "stance_by_target_actor": {},
+  "stance_by_target_type": {},
+  "topic_duration_seconds": {},
+  "topic_record_counts": {}
+}

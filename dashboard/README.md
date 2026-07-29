@@ -1,17 +1,16 @@
-# Dashboard
+# Static report
 
-The dashboard should expose evidence and uncertainty, not only rankings.
+`index.html` is the current dependency-free, accessible Project Parallax report and `metrics.json` is its matching validated analytical artifact. The checked-in report covers **1 July 2026 through 29 July 2026** and correctly displays an empty-data state until reviewed evidence is published.
 
-Recommended views:
+Regenerate through any inclusive date with:
 
-1. Framing direction by target entity
-2. Critical and favourable coverage by outlet
-3. Topic-attention distribution
-4. Speaker and source representation
-5. Allegation-certainty treatment
-6. Headline-to-body relationship
-7. Evidence-tier and human-review coverage
-8. Searchable timestamped evidence explorer
-9. Corrections and methodology versions
+```bash
+python -m src report \
+  --as-of 2026-07-29 \
+  --output dashboard/index.html \
+  --metrics-output dashboard/metrics.json
+```
 
-Avoid publishing a single opaque universal bias score.
+The report exposes targeted stance, topic and speaker attention, evidence quality, claim treatment, packaging support, review coverage, annotation conflicts, and reproducibility metadata. Chart categories deep-link to matching explorer filters. The timestamped evidence explorer keeps speaker and target attribution separate, links to sources, uses limited excerpts, and filters by text, stance, tier, review state, target type, and speaker role. Validated correction history appears alongside the evidence. The report states whether counts use target-specific evidence records or deduplicated source segments, retains the neutrality disclaimer, and contains no external scripts, fonts, trackers, or network dependencies.
+
+The CI structural audit checks language, landmarks, titles, headings, labels, unique IDs, table headers, image alternatives, and external resources. Manual keyboard and screen-reader usability testing and uncertainty or suppression displays remain dependent on real users and a final sampling design.

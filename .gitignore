@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.venv/
+venv/
+build/
+dist/
+
+# Editors and operating systems
+.DS_Store
+.idea/
+.vscode/
+
+# Secrets, credentials, and collection state
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*cookies*.txt
+cookies/
+secrets/
+
+# Restricted working material: keep complete transcripts here, never in Git
+private-workspace/*
+!private-workspace/README.md
+
+# Downloaded or generated third-party media
+*.aac
+*.flac
+*.m4a
+*.mkv
+*.mov
+*.mp3
+*.mp4
+*.ogg
+*.opus
+*.wav
+*.webm
+*.avi
+*.srt
+*.vtt
+*.ass
+*.sbv
+*.lrc
+*complete-transcript*
+*full-transcript*
+transcripts/
+downloads/
