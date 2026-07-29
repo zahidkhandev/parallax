@@ -10,7 +10,7 @@
   "collection_start": "2026-07-01",
   "collection_end": null,
   "included_event": "NEET 2026 protests",
-  "record_count": 0,
+  "record_count": 634,
   "generated_at": null,
-  "notes": "Rolling collection begins 2026-07-01. Reports use an explicit through-date and may continue beyond the current date as new coverage is added."
+  "notes": "Rolling collection begins 2026-07-01. Reports use an explicit through-date and may continue beyond the current date as new coverage is added. Machine-only headline packaging records are generated automatically and remain excluded from default published analytics until reviewed."
 }
