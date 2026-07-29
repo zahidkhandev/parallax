@@ -19,6 +19,7 @@ from .analysis_models import (
     validate_analysis_schema_current,
 )
 from .analytics import AnalysisOptions, AnalysisProvenance, build_summary
+from .bundle import BundleBuildError, build_release_bundle
 from .inventory import (
     DEFAULT_INVENTORY,
     DEFAULT_INVENTORY_SCHEMA,
@@ -219,6 +220,19 @@ def build_parser() -> argparse.ArgumentParser:
     )
     inventory_audit.add_argument("--inventory", type=Path, default=DEFAULT_INVENTORY)
     inventory_audit.add_argument("--output", type=Path, required=True)
+
+    bundle = subparsers.add_parser("bundle", help="build a deterministic public release bundle")
+    bundle.add_argument("--data", type=Path, default=DEFAULT_DATA)
+    bundle.add_argument("--schema", type=Path, default=DEFAULT_SCHEMA)
+    bundle.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
+    bundle.add_argument("--corrections", type=Path, default=DEFAULT_CORRECTIONS)
+    bundle.add_argument("--taxonomy", type=Path, default=DEFAULT_TAXONOMY)
+    bundle.add_argument("--as-of", type=date.fromisoformat, default=date.today())
+    bundle.add_argument("--inventory", type=Path, default=DEFAULT_INVENTORY)
+    bundle.add_argument("--inventory-schema", type=Path, default=DEFAULT_INVENTORY_SCHEMA)
+    bundle.add_argument("--reliability", type=Path, default=DEFAULT_RELIABILITY_DATA)
+    bundle.add_argument("--output", type=Path, required=True)
+    bundle.add_argument("--draft", action="store_true")
     return parser
 
 
@@ -338,7 +352,31 @@ def run(argv: Sequence[str] | None = None) -> int:
             audit = build_inventory_audit(inventory)
             write_json_atomic(args.output, audit)
             print(f"Wrote inventory audit for {len(inventory)} source(s) to {args.output}.")
-    except (OSError, PublicDataValidationError) as exc:
+        elif args.command == "bundle":
+            dataset = load_validated_dataset(
+                args.data,
+                args.schema,
+                args.manifest,
+                args.corrections,
+                args.taxonomy,
+                args.as_of,
+                args.inventory,
+                args.inventory_schema,
+            )
+            bundle_manifest = build_release_bundle(
+                root=Path.cwd(),
+                output=args.output,
+                dataset=dataset,
+                manifest_path=args.manifest,
+                evidence_path=args.data,
+                inventory_path=args.inventory,
+                corrections_path=args.corrections,
+                reliability_path=args.reliability,
+                draft=args.draft,
+            )
+            state = "draft" if bundle_manifest["draft"] else "release"
+            print(f"Wrote {state} bundle with {bundle_manifest['artifact_count']} artifact(s).")
+    except (OSError, PublicDataValidationError, BundleBuildError) as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 1
     return 0

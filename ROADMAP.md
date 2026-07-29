@@ -51,5 +51,6 @@ This roadmap separates implemented repository infrastructure from research work 
 - [x] Validate data, generated contracts, and analytics in CI.
 - [x] Embed dataset versions and evidence checksums in analytical artifacts.
 - [x] Define machine-enforced release acceptance criteria and a maintainer research checklist.
+- [x] Build deterministic public-only draft and strict release bundles with checksums.
 - [ ] Publish the first versioned reviewed dataset, metrics artifact, and release notes together.
 - [ ] Exercise correction, rebuild, rollback, and archival procedures on a release candidate.

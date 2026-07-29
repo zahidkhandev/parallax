@@ -45,4 +45,6 @@ Before changing the manifest to `published`, maintainers must confirm and record
 
 ## Release and rollback
 
-Tag the exact commit used to build artifacts. Archive the public manifest, readiness JSON, metrics JSON, evidence checksum, and release notes together. If a material error is found, document it in the correction log, rebuild affected artifacts, publish a patch release, and retain the prior tagged release rather than rewriting its history.
+Build a reviewable draft at any time with `python -m src bundle --draft --output build/parallax-bundle`. For publication, omit `--draft`; strict bundle creation refuses to proceed until machine readiness passes. The bundle contains only approved public data, generated artifacts, contracts, licences, and documentation, plus `bundle-manifest.json` and `SHA256SUMS`.
+
+Tag the exact commit used to build artifacts. Archive the public manifest, readiness JSON, metrics JSON, evidence checksum, bundle manifest, and release notes together. If a material error is found, document it in the correction log, rebuild affected artifacts, publish a patch release, and retain the prior tagged release rather than rewriting its history.

@@ -44,3 +44,5 @@ jobs:
         run: python -m src reliability --output "${RUNNER_TEMP}/reliability.json"
       - name: Audit source inventory coverage
         run: python -m src inventory-audit --output "${RUNNER_TEMP}/inventory-audit.json"
+      - name: Build deterministic draft bundle
+        run: python -m src bundle --draft --output "${RUNNER_TEMP}/parallax-bundle"
