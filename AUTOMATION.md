@@ -24,3 +24,7 @@ python -m src analyze --as-of 2026-07-29 --include-machine-only --output build/m
 ```
 
 The `Generate machine evidence` workflow runs this sequence on the automation pull request and commits the generated evidence, manifest, report, and exploratory metrics back to the branch.
+
+## First automated run
+
+The first run through 29 July 2026 processed all 414 included sources. It generated 634 machine-only headline records from 363 sources and skipped 51 sources whose headlines did not expose an explicit target actor. The run produced 466 English records and 168 Hindi records. See `build/automated-evidence-report.json` for the complete counts and declared limitations.
