@@ -48,6 +48,7 @@ concurrency:
 
 jobs:
   transcribe:
+    if: github.actor == 'zahidkhandev' && github.ref == 'refs/heads/main'
     runs-on: [self-hosted, parallax-transcriber]
     timeout-minutes: 360
     defaults:
@@ -62,9 +63,10 @@ jobs:
       WHISPER_DEVICE: ${{ inputs.whisper_device }}
       WHISPER_COMPUTE_TYPE: ${{ inputs.whisper_compute_type }}
     steps:
-      - name: Check out repository
+      - name: Check out trusted main branch
         uses: actions/checkout@v4
         with:
+          ref: main
           fetch-depth: 0
 
       - name: Set up Python
@@ -160,6 +162,6 @@ jobs:
         run: |
           gh pr create \
             --head "$BRANCH" \
-            --base "$GITHUB_REF_NAME" \
+            --base main \
             --title "Add machine-only spoken evidence through $THROUGH" \
             --body "Automated caption and local-ASR evidence. Complete transcripts and media remain outside Git. Every new spoken record is Tier D and machine_only, is excluded from default analytics, and requires review before it can support a confirmed public finding."
