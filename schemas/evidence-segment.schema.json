@@ -1,94 +1,206 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://project-parallax.example/schemas/evidence-segment.schema.json",
-  "title": "Project Parallax Evidence Segment",
-  "type": "object",
-  "required": [
-    "record_id",
-    "source_url",
-    "outlet",
-    "segment_start_seconds",
-    "segment_end_seconds",
-    "speaker_role",
-    "target_entity",
-    "excerpt",
-    "original_language",
-    "stance_direction",
-    "claim_type",
-    "certainty_treatment",
-    "evidence_tier",
-    "review_status"
-  ],
-  "properties": {
-    "record_id": {
-      "type": "string",
-      "minLength": 1
-    },
-    "source_url": {
-      "type": "string",
-      "format": "uri"
-    },
-    "video_id": {
-      "type": [
-        "string",
-        "null"
-      ]
-    },
-    "outlet": {
-      "type": "string",
-      "minLength": 1
-    },
-    "programme": {
-      "type": [
-        "string",
-        "null"
-      ]
-    },
-    "published_at": {
-      "type": [
-        "string",
-        "null"
+  "$defs": {
+    "ActorType": {
+      "enum": [
+        "protest_organiser",
+        "student_candidate",
+        "parent",
+        "government_representative",
+        "education_exam_authority",
+        "police",
+        "ruling_party",
+        "opposition_party",
+        "court_public_institution",
+        "anchor_correspondent",
+        "guest_expert",
+        "other_relevant_actor"
       ],
-      "format": "date-time"
+      "title": "ActorType",
+      "type": "string"
     },
-    "segment_start_seconds": {
-      "type": "number",
-      "minimum": 0
+    "CertaintyTreatment": {
+      "enum": [
+        "explicitly_qualified",
+        "implicitly_qualified",
+        "asserted_as_fact",
+        "contested",
+        "unclear"
+      ],
+      "title": "CertaintyTreatment",
+      "type": "string"
     },
-    "segment_end_seconds": {
-      "type": "number",
-      "exclusiveMinimum": 0
+    "ClaimType": {
+      "enum": [
+        "observed_fact",
+        "verified_fact",
+        "reported_allegation",
+        "speaker_allegation",
+        "opinion",
+        "question",
+        "speculation",
+        "prediction",
+        "quotation",
+        "unclear"
+      ],
+      "title": "ClaimType",
+      "type": "string"
     },
-    "speaker_name": {
-      "type": [
-        "string",
-        "null"
-      ]
+    "EvidenceKind": {
+      "enum": [
+        "spoken",
+        "headline",
+        "thumbnail",
+        "description",
+        "ticker",
+        "other_packaging"
+      ],
+      "title": "EvidenceKind",
+      "type": "string"
     },
-    "speaker_role": {
-      "type": "string",
-      "minLength": 1
+    "EvidenceTier": {
+      "enum": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "title": "EvidenceTier",
+      "type": "string"
     },
-    "target_entity": {
-      "type": "string",
-      "minLength": 1
+    "FrameLabel": {
+      "enum": [
+        "legitimising",
+        "delegitimising",
+        "criminalising",
+        "victimising",
+        "heroising",
+        "law_and_order",
+        "civil_rights",
+        "institutional_accountability",
+        "institutional_trust",
+        "public_disruption",
+        "electoral_political",
+        "procedural_legal",
+        "human_interest",
+        "evidence_verification",
+        "other"
+      ],
+      "title": "FrameLabel",
+      "type": "string"
     },
-    "excerpt": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 500
+    "LoadedLanguage": {
+      "additionalProperties": false,
+      "properties": {
+        "rationale": {
+          "maxLength": 500,
+          "minLength": 1,
+          "title": "Rationale",
+          "type": "string"
+        },
+        "term": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Term",
+          "type": "string"
+        }
+      },
+      "required": [
+        "term",
+        "rationale"
+      ],
+      "title": "LoadedLanguage",
+      "type": "object"
     },
-    "original_language": {
-      "type": "string",
-      "minLength": 2
+    "PackagingSupport": {
+      "enum": [
+        "supported_by_body",
+        "partially_supported",
+        "unsupported_in_reviewed_portion",
+        "contradicted_by_body",
+        "insufficient_transcript",
+        "not_reviewed",
+        "not_applicable"
+      ],
+      "title": "PackagingSupport",
+      "type": "string"
     },
-    "translation": {
-      "type": [
-        "string",
-        "null"
-      ]
+    "ReviewStatus": {
+      "enum": [
+        "machine_only",
+        "human_reviewed",
+        "second_reviewed",
+        "rejected"
+      ],
+      "title": "ReviewStatus",
+      "type": "string"
     },
-    "stance_direction": {
+    "Speaker": {
+      "additionalProperties": false,
+      "properties": {
+        "affiliation": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Affiliation"
+        },
+        "name": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Name"
+        },
+        "represented_actor_type": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ActorType"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "role": {
+          "$ref": "#/$defs/SpeakerRole"
+        }
+      },
+      "required": [
+        "role"
+      ],
+      "title": "Speaker",
+      "type": "object"
+    },
+    "SpeakerRole": {
+      "enum": [
+        "anchor",
+        "correspondent",
+        "guest",
+        "expert",
+        "interviewee",
+        "voiceover",
+        "quoted_source",
+        "institutional_statement",
+        "unknown",
+        "not_applicable"
+      ],
+      "title": "SpeakerRole",
+      "type": "string"
+    },
+    "StanceDirection": {
       "enum": [
         "favourable",
         "critical",
@@ -96,60 +208,283 @@
         "mixed",
         "unclear",
         "insufficient_evidence"
-      ]
-    },
-    "frames": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
-    },
-    "claim_type": {
+      ],
+      "title": "StanceDirection",
       "type": "string"
     },
-    "certainty_treatment": {
+    "TargetActor": {
+      "additionalProperties": false,
+      "properties": {
+        "actor_type": {
+          "$ref": "#/$defs/ActorType"
+        },
+        "name": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "actor_type"
+      ],
+      "title": "TargetActor",
+      "type": "object"
+    },
+    "TopicLabel": {
+      "enum": [
+        "protest_demands",
+        "student_candidate_experience",
+        "parent_response",
+        "examination_administration",
+        "government_response",
+        "policing_public_order",
+        "party_politics",
+        "courts_legal_process",
+        "public_disruption",
+        "evidence_verification",
+        "other_relevant"
+      ],
+      "title": "TopicLabel",
       "type": "string"
-    },
-    "evidence_tier": {
-      "enum": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ]
-    },
-    "review_status": {
-      "enum": [
-        "machine_only",
-        "human_reviewed",
-        "second_reviewed",
-        "rejected"
-      ]
-    },
-    "transcript_source": {
-      "type": [
-        "string",
-        "null"
-      ]
-    },
-    "model_name": {
-      "type": [
-        "string",
-        "null"
-      ]
-    },
-    "model_version": {
-      "type": [
-        "string",
-        "null"
-      ]
-    },
-    "reviewer_notes": {
-      "type": [
-        "string",
-        "null"
-      ]
     }
   },
-  "additionalProperties": false
+  "$id": "https://project-parallax.example/schemas/evidence-segment.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "One timestamped spoken or packaging observation, never an outlet-wide verdict.",
+  "properties": {
+    "accessed_at": {
+      "format": "date-time",
+      "title": "Accessed At",
+      "type": "string"
+    },
+    "allegation_qualified": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Allegation Qualified"
+    },
+    "attributed_sources": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 20,
+      "title": "Attributed Sources",
+      "type": "array"
+    },
+    "certainty": {
+      "$ref": "#/$defs/CertaintyTreatment"
+    },
+    "claim_type": {
+      "$ref": "#/$defs/ClaimType"
+    },
+    "context_notes": {
+      "maxLength": 1000,
+      "minLength": 1,
+      "title": "Context Notes",
+      "type": "string"
+    },
+    "evidence_kind": {
+      "$ref": "#/$defs/EvidenceKind"
+    },
+    "evidence_tier": {
+      "$ref": "#/$defs/EvidenceTier"
+    },
+    "excerpt": {
+      "maxLength": 500,
+      "minLength": 1,
+      "title": "Excerpt",
+      "type": "string"
+    },
+    "frame_labels": {
+      "items": {
+        "$ref": "#/$defs/FrameLabel"
+      },
+      "maxItems": 20,
+      "title": "Frame Labels",
+      "type": "array"
+    },
+    "loaded_language": {
+      "items": {
+        "$ref": "#/$defs/LoadedLanguage"
+      },
+      "maxItems": 20,
+      "title": "Loaded Language",
+      "type": "array"
+    },
+    "original_language": {
+      "pattern": "^[a-z]{2,3}(?:-[A-Za-z0-9]+)*$",
+      "title": "Original Language",
+      "type": "string"
+    },
+    "outlet": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Outlet",
+      "type": "string"
+    },
+    "packaging_support": {
+      "$ref": "#/$defs/PackagingSupport"
+    },
+    "programme": {
+      "anyOf": [
+        {
+          "maxLength": 200,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Programme"
+    },
+    "published_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Published At"
+    },
+    "record_id": {
+      "pattern": "^[a-z0-9][a-z0-9._-]{2,99}$",
+      "title": "Record Id",
+      "type": "string"
+    },
+    "review_status": {
+      "$ref": "#/$defs/ReviewStatus"
+    },
+    "reviewed_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reviewed At"
+    },
+    "reviewer_ids": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 2,
+      "title": "Reviewer Ids",
+      "type": "array"
+    },
+    "schema_version": {
+      "pattern": "^1\\.0\\.0$",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "segment_end_seconds": {
+      "exclusiveMinimum": 0,
+      "title": "Segment End Seconds",
+      "type": "number"
+    },
+    "segment_start_seconds": {
+      "minimum": 0,
+      "title": "Segment Start Seconds",
+      "type": "number"
+    },
+    "source_url": {
+      "format": "uri",
+      "maxLength": 2083,
+      "minLength": 1,
+      "title": "Source Url",
+      "type": "string"
+    },
+    "speaker": {
+      "$ref": "#/$defs/Speaker"
+    },
+    "stance": {
+      "$ref": "#/$defs/StanceDirection"
+    },
+    "target_actor": {
+      "$ref": "#/$defs/TargetActor"
+    },
+    "title": {
+      "maxLength": 500,
+      "minLength": 1,
+      "title": "Title",
+      "type": "string"
+    },
+    "topic_labels": {
+      "items": {
+        "$ref": "#/$defs/TopicLabel"
+      },
+      "maxItems": 20,
+      "minItems": 1,
+      "title": "Topic Labels",
+      "type": "array"
+    },
+    "transcript_sha256": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Transcript Sha256"
+    },
+    "translation": {
+      "anyOf": [
+        {
+          "maxLength": 500,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Translation"
+    }
+  },
+  "required": [
+    "schema_version",
+    "record_id",
+    "source_url",
+    "outlet",
+    "title",
+    "accessed_at",
+    "evidence_kind",
+    "segment_start_seconds",
+    "segment_end_seconds",
+    "speaker",
+    "target_actor",
+    "topic_labels",
+    "excerpt",
+    "original_language",
+    "stance",
+    "claim_type",
+    "certainty",
+    "packaging_support",
+    "evidence_tier",
+    "review_status",
+    "context_notes"
+  ],
+  "title": "EvidenceSegment",
+  "type": "object"
 }

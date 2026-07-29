@@ -1,0 +1,202 @@
+{
+  "$defs": {
+    "AvailabilityStatus": {
+      "enum": [
+        "available",
+        "unavailable",
+        "deleted",
+        "geo_restricted",
+        "unknown"
+      ],
+      "title": "AvailabilityStatus",
+      "type": "string"
+    },
+    "EligibilityStatus": {
+      "enum": [
+        "included",
+        "excluded",
+        "pending_review"
+      ],
+      "title": "EligibilityStatus",
+      "type": "string"
+    },
+    "MediaFormat": {
+      "enum": [
+        "tv_report",
+        "tv_debate",
+        "digital_video",
+        "interview",
+        "live_stream",
+        "article_with_video",
+        "other_news_media"
+      ],
+      "title": "MediaFormat",
+      "type": "string"
+    }
+  },
+  "$id": "https://project-parallax.example/schemas/source-inventory.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "accessed_at": {
+      "format": "date-time",
+      "title": "Accessed At",
+      "type": "string"
+    },
+    "availability": {
+      "$ref": "#/$defs/AvailabilityStatus"
+    },
+    "discovery_method": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Discovery Method",
+      "type": "string"
+    },
+    "discovery_query": {
+      "anyOf": [
+        {
+          "maxLength": 500,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Discovery Query"
+    },
+    "eligibility": {
+      "$ref": "#/$defs/EligibilityStatus"
+    },
+    "eligible_segment_end_seconds": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Eligible Segment End Seconds"
+    },
+    "eligible_segment_start_seconds": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Eligible Segment Start Seconds"
+    },
+    "exclusion_reason": {
+      "anyOf": [
+        {
+          "maxLength": 1000,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Exclusion Reason"
+    },
+    "inventory_version": {
+      "pattern": "^1\\.0\\.0$",
+      "title": "Inventory Version",
+      "type": "string"
+    },
+    "media_format": {
+      "$ref": "#/$defs/MediaFormat"
+    },
+    "notes": {
+      "anyOf": [
+        {
+          "maxLength": 1000,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Notes"
+    },
+    "original_language": {
+      "pattern": "^[a-z]{2,3}(?:-[A-Za-z0-9]+)*$",
+      "title": "Original Language",
+      "type": "string"
+    },
+    "outlet": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Outlet",
+      "type": "string"
+    },
+    "programme": {
+      "anyOf": [
+        {
+          "maxLength": 200,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Programme"
+    },
+    "published_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Published At"
+    },
+    "source_id": {
+      "pattern": "^src-[a-z0-9][a-z0-9._-]{2,95}$",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "source_url": {
+      "format": "uri",
+      "maxLength": 2083,
+      "minLength": 1,
+      "title": "Source Url",
+      "type": "string"
+    },
+    "title": {
+      "maxLength": 500,
+      "minLength": 1,
+      "title": "Title",
+      "type": "string"
+    }
+  },
+  "required": [
+    "inventory_version",
+    "source_id",
+    "source_url",
+    "outlet",
+    "title",
+    "accessed_at",
+    "original_language",
+    "media_format",
+    "availability",
+    "eligibility",
+    "discovery_method"
+  ],
+  "title": "SourceInventoryRecord",
+  "type": "object"
+}

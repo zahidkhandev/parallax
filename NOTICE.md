@@ -1,7 +1,6 @@
-# Notice
+Project Parallax — NEET Protest 2026 Media Analysis
+Copyright 2026 Project Parallax contributors
 
-Project Parallax is an independent open-source research project.
+Project Parallax is an independent, politically neutral open-source research project. It is not affiliated with or endorsed by any protest organisation, student or parent group, government body, education or examination authority, police organisation, political party, court, public institution, news outlet, platform, journalist, guest, or expert.
 
-It is not affiliated with or endorsed by any protest organisation, student group, government body, examination authority, political party, police organisation, news outlet, journalist, GitHub, Kaggle, Google or YouTube.
-
-Names, titles, URLs, brief quotations and other third-party references are used only for identification, citation, criticism, review, research and evidence-based analysis. Rights in third-party media remain with their respective owners.
+Names, titles, URLs, and limited excerpts may be recorded for identification, citation, criticism, review, and research. Third-party media and transcripts remain the property of their respective rights holders and are expressly excluded from the project's Apache-2.0 and CC BY 4.0 licences.

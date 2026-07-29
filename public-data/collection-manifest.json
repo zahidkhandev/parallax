@@ -1,10 +1,16 @@
 {
   "project": "Project Parallax",
+  "repository": "neet-protest-2026-media-analysis",
   "dataset": "NEET Protest 2026 Media Analysis",
   "dataset_version": "0.1.0",
-  "status": "scaffold",
-  "collection_start": null,
+  "methodology_version": "1.0.0",
+  "taxonomy_version": "1.0.0",
+  "schema_version": "1.0.0",
+  "status": "collection",
+  "collection_start": "2026-07-01",
   "collection_end": null,
   "included_event": "NEET 2026 protests",
-  "notes": "Collection dates must be set before production ingestion."
+  "record_count": 0,
+  "generated_at": null,
+  "notes": "Rolling collection begins 2026-07-01. Reports use an explicit through-date and may continue beyond the current date as new coverage is added."
 }
