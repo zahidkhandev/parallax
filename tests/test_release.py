@@ -25,6 +25,7 @@ def make_dataset(*, published: bool) -> tuple[ValidatedDataset, dict]:
         manifest=collection,
         evidence_sha256="a" * 64,
         report_through=date(2026, 5, 31),
+        inventory=(),
     )
     summary = build_summary(
         dataset.records,

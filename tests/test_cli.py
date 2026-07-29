@@ -2,6 +2,7 @@ import json
 from pathlib import Path
 
 from src.cli import run
+from src.inventory import canonical_inventory_schema
 from src.validate_public_data import canonical_schema
 from tests.test_corrections import valid_correction, write_rows
 from tests.test_manifest import manifest
@@ -16,6 +17,8 @@ def test_validate_and_analyze_commands(tmp_path: Path) -> None:
     output = tmp_path / "metrics.json"
     report = tmp_path / "report.html"
     readiness = tmp_path / "readiness.json"
+    inventory = tmp_path / "inventory.jsonl"
+    inventory_schema = tmp_path / "inventory-schema.json"
     data.write_text(json.dumps(valid_record()) + "\n", encoding="utf-8")
     schema.write_text(json.dumps(canonical_schema()), encoding="utf-8")
     payload = manifest()
@@ -27,6 +30,33 @@ def test_validate_and_analyze_commands(tmp_path: Path) -> None:
     )
     manifest_path.write_text(json.dumps(payload), encoding="utf-8")
     write_rows(corrections, [valid_correction()])
+    inventory.write_text(
+        json.dumps(
+            {
+                "inventory_version": "1.0.0",
+                "source_id": "src-test-001",
+                "source_url": valid_record()["source_url"],
+                "outlet": "Test outlet",
+                "programme": "Test programme",
+                "title": "Synthetic test source",
+                "published_at": "2026-05-01T09:00:00+05:30",
+                "accessed_at": "2026-05-02T10:00:00Z",
+                "original_language": "en",
+                "media_format": "digital_video",
+                "availability": "available",
+                "eligibility": "included",
+                "discovery_method": "synthetic_test_fixture",
+                "discovery_query": None,
+                "exclusion_reason": None,
+                "eligible_segment_start_seconds": None,
+                "eligible_segment_end_seconds": None,
+                "notes": "Test only.",
+            }
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    inventory_schema.write_text(json.dumps(canonical_inventory_schema()), encoding="utf-8")
 
     common = [
         "--data",
@@ -39,6 +69,10 @@ def test_validate_and_analyze_commands(tmp_path: Path) -> None:
         str(corrections),
         "--as-of",
         "2026-05-31",
+        "--inventory",
+        str(inventory),
+        "--inventory-schema",
+        str(inventory_schema),
     ]
     # A custom schema is structurally valid but drift checking still compares canonical content.
     assert run(["validate", *common]) == 0

@@ -8,6 +8,7 @@ Allowed public fields are URLs, source metadata, timestamps, limited necessary e
 - `evidence-segments.jsonl`: validated evidence records.
 - `corrections.csv`: append-only public correction history.
 - `reliability-annotations.jsonl`: independent reviewer labels for reliability rounds; no excerpts or transcripts.
+- `source-inventory.jsonl`: discovered canonical URLs, inclusion/exclusion decisions, availability, and discovery metadata.
 
 Third-party excerpts and metadata remain excluded from the project licences; see `DATA_LICENSE.md`.
 

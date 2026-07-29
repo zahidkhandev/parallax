@@ -15,6 +15,7 @@ This roadmap separates implemented repository infrastructure from research work 
 
 ## Phase 1 — Protocol and inventory
 
+- [x] Define a versioned source-inventory contract, discovery protocol, and coverage-audit tool.
 - [ ] Declare the collection window, discovery queries, platforms, outlets, and exclusion log.
 - [ ] Build and deduplicate the source inventory without selecting on expected stance.
 - [ ] Verify outlet, programme, title, publication date, availability, and mixed-stream metadata.

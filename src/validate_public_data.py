@@ -13,6 +13,14 @@ from typing import Any
 from jsonschema import Draft202012Validator, FormatChecker
 from pydantic import ValidationError
 
+from .inventory import (
+    DEFAULT_INVENTORY,
+    DEFAULT_INVENTORY_SCHEMA,
+    EligibilityStatus,
+    SourceInventoryRecord,
+    read_inventory,
+    validate_inventory_schema_current,
+)
 from .models import CollectionManifest, CorrectionRecord, EvidenceSegment
 from .taxonomy import DEFAULT_TAXONOMY, canonical_taxonomy, validate_taxonomy_current
 
@@ -42,6 +50,7 @@ class ValidatedDataset:
     manifest: CollectionManifest
     evidence_sha256: str
     report_through: date
+    inventory: tuple[SourceInventoryRecord, ...]
 
 
 def canonical_schema() -> dict[str, Any]:
@@ -202,6 +211,8 @@ def load_validated_dataset(
     corrections_path: Path = DEFAULT_CORRECTIONS,
     taxonomy_path: Path = DEFAULT_TAXONOMY,
     report_through: date | None = None,
+    inventory_path: Path = DEFAULT_INVENTORY,
+    inventory_schema_path: Path = DEFAULT_INVENTORY_SCHEMA,
     *,
     check_schema_drift: bool = True,
 ) -> ValidatedDataset:
@@ -209,6 +220,10 @@ def load_validated_dataset(
         validate_schema_current(schema_path)
     try:
         validate_taxonomy_current(taxonomy_path)
+    except ValueError as exc:
+        raise PublicDataValidationError(str(exc)) from exc
+    try:
+        validate_inventory_schema_current(inventory_schema_path)
     except ValueError as exc:
         raise PublicDataValidationError(str(exc)) from exc
     report_through = report_through or date.today()
@@ -226,6 +241,14 @@ def load_validated_dataset(
         raise PublicDataValidationError(
             f"report-through date {report_through} exceeds collection_end"
         )
+    inventory, inventory_errors = read_inventory(inventory_path)
+    if inventory_errors:
+        raise PublicDataValidationError("\n".join(inventory_errors))
+    included_inventory_urls = {
+        str(item.source_url)
+        for item in inventory
+        if item.eligibility is EligibilityStatus.INCLUDED
+    }
     for record in records:
         if record.published_at is None:
             raise PublicDataValidationError(
@@ -236,6 +259,19 @@ def load_validated_dataset(
             raise PublicDataValidationError(
                 f"record {record.record_id!r}: publication date {published_date} is outside "
                 f"{manifest.collection_start} through {report_through}"
+            )
+        if str(record.source_url) not in included_inventory_urls:
+            raise PublicDataValidationError(
+                f"record {record.record_id!r}: source_url is not an included inventory source"
+            )
+    for item in inventory:
+        if item.eligibility is not EligibilityStatus.INCLUDED or item.published_at is None:
+            continue
+        published_date = item.published_at.date()
+        if not manifest.collection_start <= published_date <= report_through:
+            raise PublicDataValidationError(
+                f"inventory source {item.source_id!r}: publication date {published_date} is "
+                f"outside {manifest.collection_start} through {report_through}"
             )
     if manifest.taxonomy_version != canonical_taxonomy()["version"]:
         raise PublicDataValidationError(
@@ -261,6 +297,7 @@ def load_validated_dataset(
         manifest=manifest,
         evidence_sha256=evidence_digest,
         report_through=report_through,
+        inventory=tuple(inventory),
     )
 
 
@@ -271,6 +308,8 @@ def validate_public_data(
     corrections_path: Path = DEFAULT_CORRECTIONS,
     taxonomy_path: Path = DEFAULT_TAXONOMY,
     report_through: date | None = None,
+    inventory_path: Path = DEFAULT_INVENTORY,
+    inventory_schema_path: Path = DEFAULT_INVENTORY_SCHEMA,
     *,
     check_schema_drift: bool = True,
 ) -> ValidationReport:
@@ -281,6 +320,8 @@ def validate_public_data(
         corrections_path,
         taxonomy_path,
         report_through,
+        inventory_path,
+        inventory_schema_path,
         check_schema_drift=check_schema_drift,
     )
     return ValidationReport(

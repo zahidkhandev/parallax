@@ -19,6 +19,14 @@ from .analysis_models import (
     validate_analysis_schema_current,
 )
 from .analytics import AnalysisOptions, AnalysisProvenance, build_summary
+from .inventory import (
+    DEFAULT_INVENTORY,
+    DEFAULT_INVENTORY_SCHEMA,
+    build_inventory_audit,
+    canonical_inventory_schema,
+    read_inventory,
+    validate_inventory_schema_current,
+)
 from .release import assess_release
 from .reliability import (
     DEFAULT_RELIABILITY_DATA,
@@ -84,6 +92,8 @@ def _analysis_for_args(args: argparse.Namespace) -> tuple[ValidatedDataset, dict
         args.corrections,
         args.taxonomy,
         args.as_of,
+        args.inventory,
+        args.inventory_schema,
     )
     summary = build_summary(
         dataset.records,
@@ -118,6 +128,8 @@ def build_parser() -> argparse.ArgumentParser:
     validate.add_argument("--corrections", type=Path, default=DEFAULT_CORRECTIONS)
     validate.add_argument("--taxonomy", type=Path, default=DEFAULT_TAXONOMY)
     validate.add_argument("--as-of", type=date.fromisoformat, default=date.today())
+    validate.add_argument("--inventory", type=Path, default=DEFAULT_INVENTORY)
+    validate.add_argument("--inventory-schema", type=Path, default=DEFAULT_INVENTORY_SCHEMA)
 
     schema = subparsers.add_parser("schema", help="check or regenerate the JSON Schema")
     schema.add_argument("--path", type=Path, default=DEFAULT_SCHEMA)
@@ -143,6 +155,8 @@ def build_parser() -> argparse.ArgumentParser:
     analyze.add_argument("--output", type=Path, required=True)
     analyze.add_argument("--include-machine-only", action="store_true")
     analyze.add_argument("--include-rejected", action="store_true")
+    analyze.add_argument("--inventory", type=Path, default=DEFAULT_INVENTORY)
+    analyze.add_argument("--inventory-schema", type=Path, default=DEFAULT_INVENTORY_SCHEMA)
 
     report = subparsers.add_parser("report", help="build a standalone accessible HTML report")
     report.add_argument("--data", type=Path, default=DEFAULT_DATA)
@@ -155,6 +169,8 @@ def build_parser() -> argparse.ArgumentParser:
     report.add_argument("--metrics-output", type=Path)
     report.add_argument("--include-machine-only", action="store_true")
     report.add_argument("--include-rejected", action="store_true")
+    report.add_argument("--inventory", type=Path, default=DEFAULT_INVENTORY)
+    report.add_argument("--inventory-schema", type=Path, default=DEFAULT_INVENTORY_SCHEMA)
 
     readiness = subparsers.add_parser(
         "readiness", help="assess structural acceptance criteria for a versioned release"
@@ -169,6 +185,8 @@ def build_parser() -> argparse.ArgumentParser:
     readiness.add_argument("--include-machine-only", action="store_true")
     readiness.add_argument("--include-rejected", action="store_true")
     readiness.add_argument("--require-ready", action="store_true")
+    readiness.add_argument("--inventory", type=Path, default=DEFAULT_INVENTORY)
+    readiness.add_argument("--inventory-schema", type=Path, default=DEFAULT_INVENTORY_SCHEMA)
 
     reliability = subparsers.add_parser(
         "reliability", help="calculate per-label agreement for double-coded records"
@@ -181,12 +199,26 @@ def build_parser() -> argparse.ArgumentParser:
     reliability.add_argument("--as-of", type=date.fromisoformat, default=date.today())
     reliability.add_argument("--annotations", type=Path, default=DEFAULT_RELIABILITY_DATA)
     reliability.add_argument("--output", type=Path, required=True)
+    reliability.add_argument("--inventory", type=Path, default=DEFAULT_INVENTORY)
+    reliability.add_argument("--inventory-schema", type=Path, default=DEFAULT_INVENTORY_SCHEMA)
 
     reliability_schema = subparsers.add_parser(
         "reliability-schema", help="check or regenerate the reliability JSON Schema"
     )
     reliability_schema.add_argument("--path", type=Path, default=DEFAULT_RELIABILITY_SCHEMA)
     reliability_schema.add_argument("--write", action="store_true")
+
+    inventory_schema = subparsers.add_parser(
+        "inventory-schema", help="check or regenerate the source inventory JSON Schema"
+    )
+    inventory_schema.add_argument("--path", type=Path, default=DEFAULT_INVENTORY_SCHEMA)
+    inventory_schema.add_argument("--write", action="store_true")
+
+    inventory_audit = subparsers.add_parser(
+        "inventory-audit", help="summarize discovered-source collection coverage"
+    )
+    inventory_audit.add_argument("--inventory", type=Path, default=DEFAULT_INVENTORY)
+    inventory_audit.add_argument("--output", type=Path, required=True)
     return parser
 
 
@@ -201,6 +233,8 @@ def run(argv: Sequence[str] | None = None) -> int:
                 args.corrections,
                 args.taxonomy,
                 args.as_of,
+                args.inventory,
+                args.inventory_schema,
             )
             print(
                 f"Validated {report.record_count} record(s); "
@@ -262,6 +296,8 @@ def run(argv: Sequence[str] | None = None) -> int:
                 args.corrections,
                 args.taxonomy,
                 args.as_of,
+                args.inventory,
+                args.inventory_schema,
             )
             annotations, errors = read_reliability_jsonl(
                 args.annotations,
@@ -285,6 +321,23 @@ def run(argv: Sequence[str] | None = None) -> int:
                 except ValueError as exc:
                     raise PublicDataValidationError(str(exc)) from exc
                 print(f"Reliability schema is current: {args.path}.")
+        elif args.command == "inventory-schema":
+            if args.write:
+                write_json_atomic(args.path, canonical_inventory_schema())
+                print(f"Wrote {args.path}.")
+            else:
+                try:
+                    validate_inventory_schema_current(args.path)
+                except ValueError as exc:
+                    raise PublicDataValidationError(str(exc)) from exc
+                print(f"Inventory schema is current: {args.path}.")
+        elif args.command == "inventory-audit":
+            inventory, errors = read_inventory(args.inventory)
+            if errors:
+                raise PublicDataValidationError("\n".join(errors))
+            audit = build_inventory_audit(inventory)
+            write_json_atomic(args.output, audit)
+            print(f"Wrote inventory audit for {len(inventory)} source(s) to {args.output}.")
     except (OSError, PublicDataValidationError) as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 1
