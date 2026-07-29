@@ -26,6 +26,8 @@ jobs:
         run: python -m src schema
       - name: Check analysis schema
         run: python -m src analysis-schema
+      - name: Check reliability schema
+        run: python -m src reliability-schema
       - name: Check controlled taxonomy
         run: python -m src taxonomy
       - name: Validate public evidence
@@ -36,3 +38,5 @@ jobs:
         run: python -m src report --output "${RUNNER_TEMP}/parallax-report.html"
       - name: Record release readiness
         run: python -m src readiness --output "${RUNNER_TEMP}/release-readiness.json"
+      - name: Build reliability report
+        run: python -m src reliability --output "${RUNNER_TEMP}/reliability.json"

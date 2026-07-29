@@ -10,7 +10,7 @@ This roadmap separates implemented repository infrastructure from research work 
 - [x] Review-filtered, segment-deduplicated descriptive analytics.
 - [x] Versioned analytical-output model and generated JSON Schema.
 - [x] CLI, tests, and CI for all generated contracts and the empty public scaffold.
-- [ ] Publish a reviewer handbook with worked multilingual edge cases.
+- [x] Publish a reviewer handbook with attribution and multilingual edge cases.
 - [ ] Add release signing or attestations after a hosting/release policy is chosen.
 
 ## Phase 1 — Protocol and inventory
@@ -30,7 +30,8 @@ This roadmap separates implemented repository infrastructure from research work 
 ## Phase 3 — Reliability and review
 
 - [ ] Train reviewers with neutral examples and adjudication rules.
-- [ ] Double-code a stratified pilot and publish per-label agreement with sample sizes.
+- [x] Implement validated independent double-coding records and per-label agreement tooling.
+- [ ] Double-code a stratified real-data pilot and publish per-label agreement with sample sizes.
 - [ ] Revise ambiguous labels based on pilot disagreements and version the methodology.
 - [ ] Second-review named or high-severity findings.
 - [ ] Audit actor, outlet, language, format, evidence-tier, and review coverage.

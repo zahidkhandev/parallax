@@ -7,6 +7,7 @@ Allowed public fields are URLs, source metadata, timestamps, limited necessary e
 - `collection-manifest.json`: scope, methodology/data versions, collection window, and status.
 - `evidence-segments.jsonl`: validated evidence records.
 - `corrections.csv`: append-only public correction history.
+- `reliability-annotations.jsonl`: independent reviewer labels for reliability rounds; no excerpts or transcripts.
 
 Third-party excerpts and metadata remain excluded from the project licences; see `DATA_LICENSE.md`.
 

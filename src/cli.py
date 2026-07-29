@@ -20,6 +20,14 @@ from .analysis_models import (
 )
 from .analytics import AnalysisOptions, AnalysisProvenance, build_summary
 from .release import assess_release
+from .reliability import (
+    DEFAULT_RELIABILITY_DATA,
+    DEFAULT_RELIABILITY_SCHEMA,
+    build_reliability_report,
+    canonical_reliability_schema,
+    read_reliability_jsonl,
+    validate_reliability_schema_current,
+)
 from .reporting import render_report
 from .taxonomy import DEFAULT_TAXONOMY, canonical_taxonomy, validate_taxonomy_current
 from .validate_public_data import (
@@ -161,6 +169,24 @@ def build_parser() -> argparse.ArgumentParser:
     readiness.add_argument("--include-machine-only", action="store_true")
     readiness.add_argument("--include-rejected", action="store_true")
     readiness.add_argument("--require-ready", action="store_true")
+
+    reliability = subparsers.add_parser(
+        "reliability", help="calculate per-label agreement for double-coded records"
+    )
+    reliability.add_argument("--data", type=Path, default=DEFAULT_DATA)
+    reliability.add_argument("--schema", type=Path, default=DEFAULT_SCHEMA)
+    reliability.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
+    reliability.add_argument("--corrections", type=Path, default=DEFAULT_CORRECTIONS)
+    reliability.add_argument("--taxonomy", type=Path, default=DEFAULT_TAXONOMY)
+    reliability.add_argument("--as-of", type=date.fromisoformat, default=date.today())
+    reliability.add_argument("--annotations", type=Path, default=DEFAULT_RELIABILITY_DATA)
+    reliability.add_argument("--output", type=Path, required=True)
+
+    reliability_schema = subparsers.add_parser(
+        "reliability-schema", help="check or regenerate the reliability JSON Schema"
+    )
+    reliability_schema.add_argument("--path", type=Path, default=DEFAULT_RELIABILITY_SCHEMA)
+    reliability_schema.add_argument("--write", action="store_true")
     return parser
 
 
@@ -228,6 +254,37 @@ def run(argv: Sequence[str] | None = None) -> int:
             print(f"Release is {state}; wrote assessment to {args.output}.")
             if args.require_ready and not readiness.ready:
                 return 2
+        elif args.command == "reliability":
+            dataset = load_validated_dataset(
+                args.data,
+                args.schema,
+                args.manifest,
+                args.corrections,
+                args.taxonomy,
+                args.as_of,
+            )
+            annotations, errors = read_reliability_jsonl(
+                args.annotations,
+                known_record_ids={record.record_id for record in dataset.records},
+            )
+            if errors:
+                raise PublicDataValidationError("\n".join(errors))
+            report = build_reliability_report(annotations)
+            write_json_atomic(args.output, report)
+            print(
+                f"Wrote reliability for {report['double_coded_pair_count']} pair(s) "
+                f"to {args.output}."
+            )
+        elif args.command == "reliability-schema":
+            if args.write:
+                write_json_atomic(args.path, canonical_reliability_schema())
+                print(f"Wrote {args.path}.")
+            else:
+                try:
+                    validate_reliability_schema_current(args.path)
+                except ValueError as exc:
+                    raise PublicDataValidationError(str(exc)) from exc
+                print(f"Reliability schema is current: {args.path}.")
     except (OSError, PublicDataValidationError) as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 1

@@ -49,11 +49,13 @@ python -m ruff check .
 python -m pytest
 python -m src schema
 python -m src analysis-schema
+python -m src reliability-schema
 python -m src taxonomy
 python -m src validate
 python -m src analyze --output build/metrics.json
 python -m src report --output dashboard/index.html --metrics-output dashboard/metrics.json
 python -m src readiness --output build/release-readiness.json
+python -m src reliability --output build/reliability.json
 ```
 
 The validator applies both the Pydantic contract in `src/models.py` and the matching Draft 2020-12 JSON Schema in `schemas/evidence-segment.schema.json` to every JSONL line. It also verifies the generated controlled taxonomy, rejects duplicate IDs and labels, validates the correction log and its record references, checks that the collection manifest's record count is exact, and fails when a checked-in contract drifts from the model.
@@ -63,6 +65,8 @@ The analysis command validates before reading, validates its result against the 
 The rolling reporting window begins **1 July 2026**. `--as-of YYYY-MM-DD` fixes the inclusive report-through date for a reproducible run; when omitted it uses the current date. The collection remains open-ended so the same commands continue to include eligible coverage after today. Every nonempty-window record must have a publication timestamp inside the declared window. `report` produces a dependency-free, accessible HTML file plus optional matching metrics JSON, a timestamped evidence explorer with client-side filters, and validated correction history.
 
 `readiness` records deterministic structural release checks. Add `--require-ready` in a release job to fail unless the dataset is nonempty, its window is closed, the manifest is published and timestamped, machine-only evidence and annotation conflicts are absent, and analytical provenance matches. Structural readiness does not replace the human research checklist in [RELEASE.md](RELEASE.md).
+
+Independent double-coding labels in `public-data/reliability-annotations.jsonl` are evaluated per field with `reliability`. The output reports pair counts, excluded groups, categorical percent agreement and Cohen’s kappa, and multi-label exact agreement and mean Jaccard. It deliberately does not collapse reliability into one score. Reviewers must follow [REVIEWER_HANDBOOK.md](REVIEWER_HANDBOOK.md).
 
 When an intentional model change alters the public contract, regenerate the schema and commit both changes together:
 
