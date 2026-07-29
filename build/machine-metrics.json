@@ -1,0 +1,1659 @@
+{
+  "allegation_qualification_counts": {
+    "conflicting_annotations": 0,
+    "qualified": 15,
+    "total_allegations": 15,
+    "unqualified": 0
+  },
+  "attributed_source_counts": {},
+  "claim_by_certainty": {
+    "observed_fact": {
+      "asserted_as_fact": 289
+    },
+    "question": {
+      "unclear": 39
+    },
+    "quotation": {
+      "implicitly_qualified": 20
+    },
+    "reported_allegation": {
+      "explicitly_qualified": 15
+    }
+  },
+  "evidence_tier_counts": {
+    "C": 634
+  },
+  "evidence_tier_segment_counts": {
+    "C": 363
+  },
+  "frame_duration_seconds": {},
+  "frame_segment_counts": {
+    "civil_rights": 262,
+    "criminalising": 9,
+    "delegitimising": 2,
+    "electoral_political": 19,
+    "evidence_verification": 11,
+    "human_interest": 62,
+    "institutional_accountability": 125,
+    "law_and_order": 53,
+    "legitimising": 7,
+    "procedural_legal": 33,
+    "public_disruption": 1
+  },
+  "loaded_language_term_counts": {
+    "brutality": 2,
+    "goonda": 2
+  },
+  "metric_version": "1.0.0",
+  "notes": [
+    "Counts describe included evidence segments, not truth, motive, or character.",
+    "Target, speaker, and source dimensions remain separate.",
+    "No composite or universal bias score is calculated.",
+    "Topic durations are non-exclusive when a segment has multiple topic labels.",
+    "Coverage metrics deduplicate source URL, evidence kind, and exact timestamps.",
+    "Stance metrics retain separate records because every stance has one target actor."
+  ],
+  "options": {
+    "include_machine_only": true,
+    "include_rejected": false
+  },
+  "original_language_segment_counts": {
+    "en": 270,
+    "hi": 93
+  },
+  "outlet_record_counts": {
+    "ABC News & Headlines – Australian Broadcasting Corporation": 1,
+    "ABP News": 8,
+    "ANI News": 5,
+    "AajTak": 6,
+    "Agniban": 4,
+    "Al Jazeera": 2,
+    "Amar Ujala": 7,
+    "Amnesty International": 1,
+    "Bhaskar English": 3,
+    "Brut": 9,
+    "BusinessLine": 2,
+    "CNBC": 2,
+    "Careers360": 44,
+    "Chhapra Today | छपरा टुडे": 2,
+    "Cinema Express": 6,
+    "DD India": 1,
+    "DT Next": 1,
+    "Daily News Report": 3,
+    "DailyQuickNews": 2,
+    "Dainik Bhaskar": 7,
+    "Dainiktribuneonline.com": 3,
+    "Deccan Chronicle": 3,
+    "Deccan Herald": 3,
+    "Devbhoomi Dialogue": 1,
+    "Divya Himachal": 2,
+    "ECIKS.org": 3,
+    "ETEducation.com": 1,
+    "ETGovernment.com": 3,
+    "ETV Bharat News": 25,
+    "EdexLive": 1,
+    "FirstBihar": 5,
+    "Free Press Journal": 13,
+    "Frontline": 4,
+    "GIRIDIH UPDATES": 4,
+    "Gulf News: Latest UAE news, Dubai news, Business, travel news, Dubai Gold rate, prayer time, cinema": 1,
+    "Hindustan Times": 18,
+    "IBC24 News : Chhattisgarh News, Madhya Pradesh News, Chhattisgarh News Live , Madhya Pradesh News Live, Chhattisgarh News In Hindi, Madhya Pradesh In Hindi": 15,
+    "IBTimes India": 1,
+    "INDToday News": 3,
+    "India Blooms": 2,
+    "India Legal": 3,
+    "India Today": 23,
+    "Jagran": 5,
+    "Jagranjosh.com": 2,
+    "Korba News Network": 3,
+    "LatestLY": 9,
+    "LatestLY हिन्दी": 2,
+    "LawBeat": 15,
+    "Live Law": 5,
+    "Livevns.news": 2,
+    "Lokmat Times": 4,
+    "MP Breaking News": 1,
+    "Main Media": 2,
+    "Mandal News": 2,
+    "Mayapuri": 1,
+    "Medical Dialogues": 5,
+    "Millat Times": 4,
+    "Moneycontrol Hindi": 3,
+    "NPG News": 3,
+    "Nai Dunia": 7,
+    "National Herald": 3,
+    "Navbharat Times": 5,
+    "News24 Hindi": 7,
+    "NewsGram - Your Most Trusted Place for News with Substance": 1,
+    "Newslaundry": 4,
+    "Odisha News, Odisha Breaking News, Odisha Latest News || Ommcom News": 2,
+    "One World News": 2,
+    "Open Magazine": 4,
+    "Outlook India": 7,
+    "Patrika News": 5,
+    "Prabhat Khabar": 10,
+    "Pratidin": 1,
+    "Prime TV India": 2,
+    "Prokerala": 9,
+    "Public Tv English": 2,
+    "R.Bharat": 2,
+    "Rediff": 3,
+    "SA News Channel": 3,
+    "Sanjeevani Samachar": 2,
+    "ShreeKanchanpath": 1,
+    "State Mirror Hindi": 3,
+    "TV9 Bharatvarsh": 2,
+    "Telangana Today": 12,
+    "The Assam Tribune": 2,
+    "The Borderlens": 1,
+    "The Daily Jagran": 3,
+    "The Economic Times": 7,
+    "The Federal": 1,
+    "The Federal देश": 1,
+    "The Financial World": 2,
+    "The Hindu": 24,
+    "The Indian Express": 3,
+    "The Live Nagpur": 3,
+    "The New Indian Express": 45,
+    "The News Khazana - TNK": 3,
+    "The PIE News": 1,
+    "The Times of India": 42,
+    "The Wire": 3,
+    "ThePrint Hindi": 4,
+    "TheQuint": 3,
+    "Times Now Navbharat": 5,
+    "TimesNow": 1,
+    "Udaipurtimes website": 2,
+    "Verdictum": 10,
+    "Webvarta News Agency": 1,
+    "Whalesbook": 1,
+    "dainiknavajyoti.com": 2,
+    "englishpunjabkesari": 2,
+    "https://www.awazthevoice.in": 4,
+    "https://www.hindi.awazthevoice.in": 3,
+    "inextlive": 1,
+    "knewsindia.in": 1,
+    "mint": 15,
+    "ummid": 1,
+    "टीएनपी न्यूज़": 1,
+    "दैनिक भास्कर हिन्दी (Dainik Bhaskar Hindi)": 5,
+    "हिंदुस्तान": 11
+  },
+  "outlet_segment_counts": {
+    "ABC News & Headlines – Australian Broadcasting Corporation": 1,
+    "ABP News": 5,
+    "ANI News": 2,
+    "AajTak": 4,
+    "Agniban": 2,
+    "Al Jazeera": 1,
+    "Amar Ujala": 6,
+    "Amnesty International": 1,
+    "Bhaskar English": 1,
+    "Brut": 6,
+    "BusinessLine": 1,
+    "CNBC": 1,
+    "Careers360": 28,
+    "Chhapra Today | छपरा टुडे": 1,
+    "Cinema Express": 3,
+    "DD India": 1,
+    "DT Next": 1,
+    "Daily News Report": 1,
+    "DailyQuickNews": 1,
+    "Dainik Bhaskar": 5,
+    "Dainiktribuneonline.com": 1,
+    "Deccan Chronicle": 2,
+    "Deccan Herald": 2,
+    "Devbhoomi Dialogue": 1,
+    "Divya Himachal": 1,
+    "ECIKS.org": 1,
+    "ETEducation.com": 1,
+    "ETGovernment.com": 1,
+    "ETV Bharat News": 13,
+    "EdexLive": 1,
+    "FirstBihar": 2,
+    "Free Press Journal": 7,
+    "Frontline": 3,
+    "GIRIDIH UPDATES": 1,
+    "Gulf News: Latest UAE news, Dubai news, Business, travel news, Dubai Gold rate, prayer time, cinema": 1,
+    "Hindustan Times": 9,
+    "IBC24 News : Chhattisgarh News, Madhya Pradesh News, Chhattisgarh News Live , Madhya Pradesh News Live, Chhattisgarh News In Hindi, Madhya Pradesh In Hindi": 7,
+    "IBTimes India": 1,
+    "INDToday News": 1,
+    "India Blooms": 1,
+    "India Legal": 1,
+    "India Today": 16,
+    "Jagran": 2,
+    "Jagranjosh.com": 1,
+    "Korba News Network": 1,
+    "LatestLY": 7,
+    "LatestLY हिन्दी": 1,
+    "LawBeat": 7,
+    "Live Law": 2,
+    "Livevns.news": 1,
+    "Lokmat Times": 2,
+    "MP Breaking News": 1,
+    "Main Media": 1,
+    "Mandal News": 1,
+    "Mayapuri": 1,
+    "Medical Dialogues": 2,
+    "Millat Times": 3,
+    "Moneycontrol Hindi": 2,
+    "NPG News": 1,
+    "Nai Dunia": 3,
+    "National Herald": 1,
+    "Navbharat Times": 3,
+    "News24 Hindi": 3,
+    "NewsGram - Your Most Trusted Place for News with Substance": 1,
+    "Newslaundry": 2,
+    "Odisha News, Odisha Breaking News, Odisha Latest News || Ommcom News": 1,
+    "One World News": 1,
+    "Open Magazine": 2,
+    "Outlook India": 4,
+    "Patrika News": 2,
+    "Prabhat Khabar": 6,
+    "Pratidin": 1,
+    "Prime TV India": 1,
+    "Prokerala": 5,
+    "Public Tv English": 1,
+    "R.Bharat": 1,
+    "Rediff": 2,
+    "SA News Channel": 1,
+    "Sanjeevani Samachar": 1,
+    "ShreeKanchanpath": 1,
+    "State Mirror Hindi": 1,
+    "TV9 Bharatvarsh": 2,
+    "Telangana Today": 5,
+    "The Assam Tribune": 1,
+    "The Borderlens": 1,
+    "The Daily Jagran": 1,
+    "The Economic Times": 4,
+    "The Federal": 1,
+    "The Federal देश": 1,
+    "The Financial World": 1,
+    "The Hindu": 17,
+    "The Indian Express": 3,
+    "The Live Nagpur": 1,
+    "The New Indian Express": 30,
+    "The News Khazana - TNK": 1,
+    "The PIE News": 1,
+    "The Times of India": 24,
+    "The Wire": 1,
+    "ThePrint Hindi": 1,
+    "TheQuint": 2,
+    "Times Now Navbharat": 2,
+    "TimesNow": 1,
+    "Udaipurtimes website": 1,
+    "Verdictum": 4,
+    "Webvarta News Agency": 1,
+    "Whalesbook": 1,
+    "dainiknavajyoti.com": 1,
+    "englishpunjabkesari": 1,
+    "https://www.awazthevoice.in": 1,
+    "https://www.hindi.awazthevoice.in": 3,
+    "inextlive": 1,
+    "knewsindia.in": 1,
+    "mint": 10,
+    "ummid": 1,
+    "टीएनपी न्यूज़": 1,
+    "दैनिक भास्कर हिन्दी (Dainik Bhaskar Hindi)": 2,
+    "हिंदुस्तान": 7
+  },
+  "packaging_support_counts": {
+    "not_reviewed": 363
+  },
+  "population": {
+    "additional_target_records": 271,
+    "all_records": 634,
+    "excluded_records": 0,
+    "human_review_coverage": 0.0,
+    "included_distinct_segments": 363,
+    "included_records": 634,
+    "included_spoken_duration_seconds": 0.0,
+    "reviewed_records": 0
+  },
+  "provenance": {
+    "collection_end": null,
+    "correction_count": 0,
+    "dataset_version": "0.1.0",
+    "evidence_sha256": "b0259b876026aad74dcf2559e051a9858274da98c8cc59b075ff94695467814e",
+    "methodology_version": "1.0.0",
+    "report_start": "2026-07-01",
+    "report_through": "2026-07-29",
+    "schema_version": "1.0.0",
+    "taxonomy_version": "1.0.0"
+  },
+  "review_state_counts": {
+    "machine_only": 634
+  },
+  "segment_annotation_conflict_counts": {},
+  "speaker_role_counts": {
+    "institutional_statement": 363
+  },
+  "speaker_role_duration_seconds": {},
+  "stance_by_outlet_and_target_type": {
+    "ABC News & Headlines – Australian Broadcasting Corporation": {
+      "police": {
+        "neutral_descriptive": 1
+      }
+    },
+    "ABP News": {
+      "government_representative": {
+        "neutral_descriptive": 1
+      },
+      "protest_organiser": {
+        "favourable": 2,
+        "neutral_descriptive": 1
+      },
+      "student_candidate": {
+        "favourable": 2,
+        "neutral_descriptive": 2
+      }
+    },
+    "ANI News": {
+      "court_public_institution": {
+        "neutral_descriptive": 1
+      },
+      "police": {
+        "neutral_descriptive": 1
+      },
+      "protest_organiser": {
+        "neutral_descriptive": 2
+      },
+      "student_candidate": {
+        "neutral_descriptive": 1
+      }
+    },
+    "AajTak": {
+      "government_representative": {
+        "critical": 1,
+        "neutral_descriptive": 1
+      },
+      "protest_organiser": {
+        "neutral_descriptive": 3
+      },
+      "student_candidate": {
+        "neutral_descriptive": 1
+      }
+    },
+    "Agniban": {
+      "government_representative": {
+        "neutral_descriptive": 1
+      },
+      "protest_organiser": {
+        "neutral_descriptive": 2
+      },
+      "student_candidate": {
+        "neutral_descriptive": 1
+      }
+    },
+    "Al Jazeera": {
+      "protest_organiser": {
+        "unclear": 1
+      },
+      "student_candidate": {
+        "unclear": 1
+      }
+    },
+    "Amar Ujala": {
+      "court_public_institution": {
+        "unclear": 1
+      },
+      "protest_organiser": {
+        "neutral_descriptive": 3,
+        "unclear": 2
+      },
+      "student_candidate": {
+        "neutral_descriptive": 1
+      }
+    },
+    "Amnesty International": {
+      "protest_organiser": {
+        "neutral_descriptive": 1
+      }
+    },
+    "Bhaskar English": {
+      "education_exam_authority": {
+        "neutral_descriptive": 1
+      },
+      "protest_organiser": {
+        "neutral_descriptive": 1
+      },
+      "student_candidate": {
+        "neutral_descriptive": 1
+      }
+    },
+    "Brut": {
+      "government_representative": {
+        "critical": 1,
+        "unclear": 2
+      },
+      "protest_organiser": {
+        "neutral_descriptive": 3,
+        "unclear": 3
+      }
+    },
+    "BusinessLine": {
+      "protest_organiser": {
+        "favourable": 1
+      },
+      "student_candidate": {
+        "favourable": 1
+      }
+    },
+    "CNBC": {
+      "government_representative": {
+        "neutral_descriptive": 1
+      },
+      "protest_organiser": {
+        "neutral_descriptive": 1
+      }
+    },
+    "Careers360": {
+      "court_public_institution": {
+        "neutral_descriptive": 4
+      },
+      "education_exam_authority": {
+        "neutral_descriptive": 4,
+        "unclear": 2
+      },
+      "government_representative": {
+        "critical": 5
+      },
+      "parent": {
+        "neutral_descriptive": 2
+      },
+      "police": {
+        "neutral_descriptive": 1
+      },
+      "protest_organiser": {
+        "neutral_descriptive": 15
+      },
+      "student_candidate": {
+        "neutral_descriptive": 11
+      }
+    },
+    "Chhapra Today | छपरा टुडे": {
+      "government_representative": {
+        "favourable": 1
+      },
+      "protest_organiser": {
+        "neutral_descriptive": 1
+      }
+    },
+    "Cinema Express": {
+      "parent": {
+        "neutral_descriptive": 1
+      },
+      "protest_organiser": {
+        "favourable": 2,
+        "neutral_descriptive": 1
+      },
+      "student_candidate": {
+        "favourable": 2
+      }
+    },
+    "DD India": {
+      "protest_organiser": {
+        "neutral_descriptive": 1
+      }
+    },
+    "DT Next": {
+      "protest_organiser": {
+        "neutral_descriptive": 1
+      }
+    },
+    "Daily News Report": {
+      "government_representative": {
+        "critical": 2
+      },
+      "student_candidate": {
+        "neutral_descriptive": 1
+      }
+    },
+    "DailyQuickNews": {
+      "government_representative": {
+        "critical": 1
+      },
+      "protest_organiser": {
+        "neutral_descriptive": 1
+      }
+    },
+    "Dainik Bhaskar": {
+      "education_exam_authority": {
+        "neutral_descriptive": 1
+      },
+      "police": {
+        "neutral_descriptive": 1
+      },
+      "protest_organiser": {
+        "favourable": 1,
+        "neutral_descriptive": 1
+      },
+      "student_candidate": {
+        "neutral_descriptive": 3
+      }
+    },
+    "Dainiktribuneonline.com": {
+      "government_representative": {
+        "neutral_descriptive": 1
+      },
+      "protest_organiser": {
+        "neutral_descriptive": 1
+      },
+      "student_candidate": {
+        "neutral_descriptive": 1
+      }
+    },
+    "Deccan Chronicle": {
+      "protest_organiser": {
+        "neutral_descriptive": 2
+      },
+      "student_candidate": {
+        "neutral_descriptive": 1
+      }
+    },
+    "Deccan Herald": {
+      "protest_organiser": {
+        "neutral_descriptive": 2
+      },
+      "student_candidate": {
+        "neutral_descriptive": 1
+      }
+    },
+    "Devbhoomi Dialogue": {
+      "student_candidate": {
+        "neutral_descriptive": 1
+      }
+    },
+    "Divya Himachal": {
+      "government_representative": {
+        "critical": 2
+      }
+    },
+    "ECIKS.org": {
+      "government_representative": {
+        "critical": 2
+      },
+      "protest_organiser": {
+        "neutral_descriptive": 1
+      }
+    },
+    "ETEducation.com": {
+      "government_representative": {
+        "critical": 1
+      }
+    },
+    "ETGovernment.com": {
+      "government_representative": {
+        "critical": 1
+      },
+      "protest_organiser": {
+        "neutral_descriptive": 1
+      },
+      "student_candidate": {
+        "neutral_descriptive": 1
+      }
+    },
+    "ETV Bharat News": {
+      "court_public_institution": {
+        "neutral_descriptive": 1
+      },
+      "education_exam_authority": {
+        "neutral_descriptive": 2
+      },
+      "government_representative": {
+        "critical": 4,
+        "neutral_descriptive": 2
+      },
+      "opposition_party": {
+        "critical": 1,
+        "neutral_descriptive": 3,
+        "unclear": 1
+      },
+      "protest_organiser": {
+        "neutral_descriptive": 7
+      },
+      "student_candidate": {
+        "neutral_descriptive": 4
+      }
+    },
+    "EdexLive": {
+      "protest_organiser": {
+        "neutral_descriptive": 1
+      }
+    },
+    "FirstBihar": {
+      "government_representative": {
+        "neutral_descriptive": 3
+      },
+      "protest_organiser": {
+        "neutral_descriptive": 1
+      },
+      "student_candidate": {
+        "neutral_descriptive": 1
+      }
+    },
+    "Free Press Journal": {
+      "government_representative": {
+        "critical": 1
+      },
+      "opposition_party": {
+        "neutral_descriptive": 1
+      },
+      "police": {
+        "neutral_descriptive": 2
+      },
+      "protest_organiser": {
+        "neutral_descriptive": 5,
+        "unclear": 1
+      },
+      "student_candidate": {
+        "neutral_descriptive": 2,
+        "unclear": 1
+      }
+    },
+    "Frontline": {
+      "government_representative": {
+        "critical": 1,
+        "neutral_descriptive": 1
+      },
+      "protest_organiser": {
+        "neutral_descriptive": 2
+      }
+    },
+    "GIRIDIH UPDATES": {
+      "government_representative": {
+        "critical": 2
+      },
+      "protest_organiser": {
+        "neutral_descriptive": 1
+      },
+      "student_candidate": {
+        "neutral_descriptive": 1
+      }
+    },
+    "Gulf News: Latest UAE news, Dubai news, Business, travel news, Dubai Gold rate, prayer time, cinema": {
+      "student_candidate": {
+        "neutral_descriptive": 1
+      }
+    },
+    "Hindustan Times": {
+      "court_public_institution": {
+        "neutral_descriptive": 1
+      },
+      "education_exam_authority": {
+        "neutral_descriptive": 2
+      },
+      "protest_organiser": {
+        "favourable": 2,
+        "neutral_descriptive": 7
+      },
+      "student_candidate": {
+        "favourable": 2,
+        "neutral_descriptive": 4
+      }
+    },
+    "IBC24 News : Chhattisgarh News, Madhya Pradesh News, Chhattisgarh News Live , Madhya Pradesh News Live, Chhattisgarh News In Hindi, Madhya Pradesh In Hindi": {
+      "government_representative": {
+        "neutral_descriptive": 2
+      },
+      "police": {
+        "critical": 1,
+        "neutral_descriptive": 1
+      },
+      "protest_organiser": {
+        "favourable": 1,
+        "neutral_descriptive": 5
+      },
+      "student_candidate": {
+        "favourable": 1,
+        "neutral_descriptive": 4
+      }
+    },
+    "IBTimes India": {
+      "government_representative": {
+        "critical": 1
+      }
+    },
+    "INDToday News": {
+      "government_representative": {
+        "critical": 1
+      },
+      "protest_organiser": {
+        "neutral_descriptive": 1
+      },
+      "student_candidate": {
+        "neutral_descriptive": 1
+      }
+    },
+    "India Blooms": {
+      "court_public_institution": {
+        "neutral_descriptive": 1
+      },
+      "protest_organiser": {
+        "neutral_descriptive": 1
+      }
+    },
+    "India Legal": {
+      "court_public_institution": {
+        "neutral_descriptive": 1
+      },
+      "protest_organiser": {
+        "neutral_descriptive": 1
+      },
+      "student_candidate": {
+        "neutral_descriptive": 1
+      }
+    },
+    "India Today": {
+      "court_public_institution": {
+        "neutral_descriptive": 1
+      },
+      "government_representative": {
+        "critical": 3,
+        "unclear": 1
+      },
+      "police": {
+        "neutral_descriptive": 2
+      },
+      "protest_organiser": {
+        "neutral_descriptive": 10,
+        "unclear": 1
+      },
+      "student_candidate": {
+        "favourable": 1,
+        "neutral_descriptive": 3,
+        "unclear": 1
+      }
+    },
+    "Jagran": {
+      "government_representative": {
+        "critical": 2
+      },
+      "protest_organiser": {
+        "neutral_descriptive": 2
+      },
+      "student_candidate": {
+        "neutral_descriptive": 1
+      }
+    },
+    "Jagranjosh.com": {
+      "protest_organiser": {
+        "unclear": 1
+      },
+      "student_candidate": {
+        "unclear": 1
+      }
+    },
+    "Korba News Network": {
+      "government_representative": {
+        "critical": 2
+      },
+      "protest_organiser": {
+        "neutral_descriptive": 1
+      }
+    },
+    "LatestLY": {
+      "protest_organiser": {
+        "neutral_descriptive": 4,
+        "unclear": 1
+      },
+      "student_candidate": {
+        "favourable": 1,
+        "neutral_descriptive": 2,
+        "unclear": 1
+      }
+    },
+    "LatestLY हिन्दी": {
+      "protest_organiser": {
+        "unclear": 1
+      },
+      "student_candidate": {
+        "unclear": 1
+      }
+    },
+    "LawBeat": {
+      "court_public_institution": {
+        "neutral_descriptive": 5
+      },
+      "government_representative": {
+        "critical": 2
+      },
+      "police": {
+        "critical": 1,
+        "neutral_descriptive": 1
+      },
+      "protest_organiser": {
+        "neutral_descriptive": 5
+      },
+      "student_candidate": {
+        "neutral_descriptive": 1
+      }
+    },
+    "Live Law": {
+      "court_public_institution": {
+        "neutral_descriptive": 2
+      },
+      "police": {
+        "neutral_descriptive": 1
+      },
+      "protest_organiser": {
+        "neutral_descriptive": 2
+      }
+    },
+    "Livevns.news": {
+      "protest_organiser": {
+        "neutral_descriptive": 1
+      },
+      "student_candidate": {
+        "neutral_descriptive": 1
+      }
+    },
+    "Lokmat Times": {
+      "protest_organiser": {
+        "neutral_descriptive": 2
+      },
+      "student_candidate": {
+        "neutral_descriptive": 2
+      }
+    },
+    "MP Breaking News": {
+      "student_candidate": {
+        "neutral_descriptive": 1
+      }
+    },
+    "Main Media": {
+      "protest_organiser": {
+        "neutral_descriptive": 1
+      },
+      "student_candidate": {
+        "neutral_descriptive": 1
+      }
+    },
+    "Mandal News": {
+      "court_public_institution": {
+        "neutral_descriptive": 1
+      },
+      "student_candidate": {
+        "neutral_descriptive": 1
+      }
+    },
+    "Mayapuri": {
+      "protest_organiser": {
+        "neutral_descriptive": 1
+      }
+    },
+    "Medical Dialogues": {
+      "education_exam_authority": {
+        "neutral_descriptive": 1
+      },
+      "government_representative": {
+        "critical": 2
+      },
+      "protest_organiser": {
+        "neutral_descriptive": 1
+      },
+      "student_candidate": {
+        "neutral_descriptive": 1
+      }
+    },
+    "Millat Times": {
+      "protest_organiser": {
+        "critical": 1,
+        "neutral_descriptive": 2
+      },
+      "ruling_party": {
+        "neutral_descriptive": 1
+      }
+    },
+    "Moneycontrol Hindi": {
+      "government_representative": {
+        "neutral_descriptive": 1
+      },
+      "protest_organiser": {
+        "unclear": 1
+      },
+      "student_candidate": {
+        "neutral_descriptive": 1
+      }
+    },
+    "NPG News": {
+      "government_representative": {
+        "unclear": 1
+      },
+      "opposition_party": {
+        "unclear": 1
+      },
+      "protest_organiser": {
+        "unclear": 1
+      }
+    },
+    "Nai Dunia": {
+      "education_exam_authority": {
+        "unclear": 1
+      },
+      "government_representative": {
+        "neutral_descriptive": 3,
+        "unclear": 2
+      },
+      "protest_organiser": {
+        "unclear": 1
+      }
+    },
+    "National Herald": {
+      "police": {
+        "neutral_descriptive": 1
+      },
+      "protest_organiser": {
+        "neutral_descriptive": 1
+      },
+      "student_candidate": {
+        "neutral_descriptive": 1
+      }
+    },
+    "Navbharat Times": {
+      "government_representative": {
+        "neutral_descriptive": 1,
+        "unclear": 1
+      },
+      "police": {
+        "neutral_descriptive": 1
+      },
+      "protest_organiser": {
+        "neutral_descriptive": 1
+      },
+      "student_candidate": {
+        "neutral_descriptive": 1
+      }
+    },
+    "News24 Hindi": {
+      "court_public_institution": {
+        "neutral_descriptive": 1
+      },
+      "government_representative": {
+        "unclear": 1
+      },
+      "opposition_party": {
+        "critical": 1
+      },
+      "police": {
+        "neutral_descriptive": 1
+      },
+      "student_candidate": {
+        "neutral_descriptive": 2,
+        "unclear": 1
+      }
+    },
+    "NewsGram - Your Most Trusted Place for News with Substance": {
+      "court_public_institution": {
+        "neutral_descriptive": 1
+      }
+    },
+    "Newslaundry": {
+      "government_representative": {
+        "critical": 1
+      },
+      "protest_organiser": {
+        "neutral_descriptive": 1,
+        "unclear": 1
+      },
+      "student_candidate": {
+        "neutral_descriptive": 1
+      }
+    },
+    "Odisha News, Odisha Breaking News, Odisha Latest News || Ommcom News": {
+      "protest_organiser": {
+        "neutral_descriptive": 1
+      },
+      "student_candidate": {
+        "neutral_descriptive": 1
+      }
+    },
+    "One World News": {
+      "protest_organiser": {
+        "favourable": 1
+      },
+      "student_candidate": {
+        "favourable": 1
+      }
+    },
+    "Open Magazine": {
+      "court_public_institution": {
+        "neutral_descriptive": 1
+      },
+      "government_representative": {
+        "critical": 2
+      },
+      "protest_organiser": {
+        "neutral_descriptive": 1
+      }
+    },
+    "Outlook India": {
+      "court_public_institution": {
+        "neutral_descriptive": 1
+      },
+      "government_representative": {
+        "critical": 1,
+        "unclear": 2
+      },
+      "opposition_party": {
+        "neutral_descriptive": 1
+      },
+      "protest_organiser": {
+        "neutral_descriptive": 2
+      }
+    },
+    "Patrika News": {
+      "court_public_institution": {
+        "neutral_descriptive": 1
+      },
+      "government_representative": {
+        "unclear": 1
+      },
+      "protest_organiser": {
+        "neutral_descriptive": 1,
+        "unclear": 1
+      },
+      "student_candidate": {
+        "neutral_descriptive": 1
+      }
+    },
+    "Prabhat Khabar": {
+      "government_representative": {
+        "critical": 3
+      },
+      "police": {
+        "neutral_descriptive": 1
+      },
+      "protest_organiser": {
+        "neutral_descriptive": 3
+      },
+      "ruling_party": {
+        "neutral_descriptive": 1
+      },
+      "student_candidate": {
+        "neutral_descriptive": 2
+      }
+    },
+    "Pratidin": {
+      "parent": {
+        "neutral_descriptive": 1
+      }
+    },
+    "Prime TV India": {
+      "protest_organiser": {
+        "neutral_descriptive": 1
+      },
+      "student_candidate": {
+        "neutral_descriptive": 1
+      }
+    },
+    "Prokerala": {
+      "government_representative": {
+        "critical": 1
+      },
+      "protest_organiser": {
+        "neutral_descriptive": 5
+      },
+      "student_candidate": {
+        "neutral_descriptive": 3
+      }
+    },
+    "Public Tv English": {
+      "parent": {
+        "neutral_descriptive": 1
+      },
+      "protest_organiser": {
+        "favourable": 1
+      }
+    },
+    "R.Bharat": {
+      "government_representative": {
+        "neutral_descriptive": 1
+      },
+      "protest_organiser": {
+        "neutral_descriptive": 1
+      }
+    },
+    "Rediff": {
+      "court_public_institution": {
+        "neutral_descriptive": 1
+      },
+      "police": {
+        "critical": 1
+      },
+      "protest_organiser": {
+        "neutral_descriptive": 1
+      }
+    },
+    "SA News Channel": {
+      "government_representative": {
+        "critical": 2
+      },
+      "student_candidate": {
+        "neutral_descriptive": 1
+      }
+    },
+    "Sanjeevani Samachar": {
+      "government_representative": {
+        "neutral_descriptive": 1
+      },
+      "protest_organiser": {
+        "neutral_descriptive": 1
+      }
+    },
+    "ShreeKanchanpath": {
+      "protest_organiser": {
+        "neutral_descriptive": 1
+      }
+    },
+    "State Mirror Hindi": {
+      "government_representative": {
+        "unclear": 1
+      },
+      "protest_organiser": {
+        "unclear": 1
+      },
+      "student_candidate": {
+        "unclear": 1
+      }
+    },
+    "TV9 Bharatvarsh": {
+      "education_exam_authority": {
+        "neutral_descriptive": 1
+      },
+      "government_representative": {
+        "unclear": 1
+      }
+    },
+    "Telangana Today": {
+      "court_public_institution": {
+        "neutral_descriptive": 1
+      },
+      "government_representative": {
+        "critical": 1
+      },
+      "police": {
+        "critical": 1,
+        "neutral_descriptive": 1
+      },
+      "protest_organiser": {
+        "favourable": 1,
+        "neutral_descriptive": 5
+      },
+      "student_candidate": {
+        "favourable": 1,
+        "neutral_descriptive": 1
+      }
+    },
+    "The Assam Tribune": {
+      "government_representative": {
+        "neutral_descriptive": 1
+      },
+      "protest_organiser": {
+        "neutral_descriptive": 1
+      }
+    },
+    "The Borderlens": {
+      "protest_organiser": {
+        "neutral_descriptive": 1
+      }
+    },
+    "The Daily Jagran": {
+      "government_representative": {
+        "critical": 1
+      },
+      "protest_organiser": {
+        "neutral_descriptive": 1
+      },
+      "student_candidate": {
+        "neutral_descriptive": 1
+      }
+    },
+    "The Economic Times": {
+      "court_public_institution": {
+        "neutral_descriptive": 1
+      },
+      "government_representative": {
+        "unclear": 1
+      },
+      "police": {
+        "critical": 1
+      },
+      "protest_organiser": {
+        "neutral_descriptive": 1,
+        "unclear": 3
+      }
+    },
+    "The Federal": {
+      "protest_organiser": {
+        "neutral_descriptive": 1
+      }
+    },
+    "The Federal देश": {
+      "government_representative": {
+        "critical": 1
+      }
+    },
+    "The Financial World": {
+      "parent": {
+        "neutral_descriptive": 1
+      },
+      "student_candidate": {
+        "neutral_descriptive": 1
+      }
+    },
+    "The Hindu": {
+      "court_public_institution": {
+        "neutral_descriptive": 1
+      },
+      "police": {
+        "critical": 1,
+        "neutral_descriptive": 2
+      },
+      "protest_organiser": {
+        "favourable": 1,
+        "neutral_descriptive": 12,
+        "unclear": 1
+      },
+      "student_candidate": {
+        "favourable": 1,
+        "neutral_descriptive": 5
+      }
+    },
+    "The Indian Express": {
+      "education_exam_authority": {
+        "neutral_descriptive": 1
+      },
+      "police": {
+        "neutral_descriptive": 1
+      },
+      "protest_organiser": {
+        "neutral_descriptive": 1
+      }
+    },
+    "The Live Nagpur": {
+      "government_representative": {
+        "critical": 2
+      },
+      "protest_organiser": {
+        "neutral_descriptive": 1
+      }
+    },
+    "The New Indian Express": {
+      "court_public_institution": {
+        "neutral_descriptive": 1
+      },
+      "government_representative": {
+        "critical": 1
+      },
+      "opposition_party": {
+        "critical": 1,
+        "neutral_descriptive": 1
+      },
+      "parent": {
+        "neutral_descriptive": 1
+      },
+      "police": {
+        "critical": 2,
+        "neutral_descriptive": 4
+      },
+      "protest_organiser": {
+        "favourable": 2,
+        "neutral_descriptive": 24
+      },
+      "student_candidate": {
+        "favourable": 1,
+        "neutral_descriptive": 7
+      }
+    },
+    "The News Khazana - TNK": {
+      "government_representative": {
+        "critical": 2
+      },
+      "student_candidate": {
+        "neutral_descriptive": 1
+      }
+    },
+    "The PIE News": {
+      "protest_organiser": {
+        "neutral_descriptive": 1
+      }
+    },
+    "The Times of India": {
+      "court_public_institution": {
+        "neutral_descriptive": 3
+      },
+      "education_exam_authority": {
+        "neutral_descriptive": 1
+      },
+      "government_representative": {
+        "critical": 2
+      },
+      "opposition_party": {
+        "neutral_descriptive": 2
+      },
+      "parent": {
+        "neutral_descriptive": 4
+      },
+      "police": {
+        "neutral_descriptive": 4
+      },
+      "protest_organiser": {
+        "neutral_descriptive": 17
+      },
+      "ruling_party": {
+        "neutral_descriptive": 1
+      },
+      "student_candidate": {
+        "neutral_descriptive": 8
+      }
+    },
+    "The Wire": {
+      "parent": {
+        "unclear": 1
+      },
+      "protest_organiser": {
+        "unclear": 1
+      },
+      "student_candidate": {
+        "unclear": 1
+      }
+    },
+    "ThePrint Hindi": {
+      "government_representative": {
+        "neutral_descriptive": 2
+      },
+      "opposition_party": {
+        "neutral_descriptive": 1
+      },
+      "student_candidate": {
+        "neutral_descriptive": 1
+      }
+    },
+    "TheQuint": {
+      "police": {
+        "critical": 1
+      },
+      "protest_organiser": {
+        "neutral_descriptive": 2
+      }
+    },
+    "Times Now Navbharat": {
+      "government_representative": {
+        "neutral_descriptive": 1,
+        "unclear": 1
+      },
+      "protest_organiser": {
+        "unclear": 1
+      },
+      "student_candidate": {
+        "neutral_descriptive": 1,
+        "unclear": 1
+      }
+    },
+    "TimesNow": {
+      "protest_organiser": {
+        "neutral_descriptive": 1
+      }
+    },
+    "Udaipurtimes website": {
+      "protest_organiser": {
+        "neutral_descriptive": 1
+      },
+      "student_candidate": {
+        "neutral_descriptive": 1
+      }
+    },
+    "Verdictum": {
+      "court_public_institution": {
+        "neutral_descriptive": 3
+      },
+      "police": {
+        "neutral_descriptive": 2
+      },
+      "protest_organiser": {
+        "neutral_descriptive": 4
+      },
+      "student_candidate": {
+        "neutral_descriptive": 1
+      }
+    },
+    "Webvarta News Agency": {
+      "government_representative": {
+        "critical": 1
+      }
+    },
+    "Whalesbook": {
+      "protest_organiser": {
+        "neutral_descriptive": 1
+      }
+    },
+    "dainiknavajyoti.com": {
+      "protest_organiser": {
+        "favourable": 1
+      },
+      "student_candidate": {
+        "favourable": 1
+      }
+    },
+    "englishpunjabkesari": {
+      "protest_organiser": {
+        "neutral_descriptive": 1
+      },
+      "student_candidate": {
+        "neutral_descriptive": 1
+      }
+    },
+    "https://www.awazthevoice.in": {
+      "opposition_party": {
+        "neutral_descriptive": 1
+      },
+      "police": {
+        "neutral_descriptive": 1
+      },
+      "protest_organiser": {
+        "neutral_descriptive": 1
+      },
+      "student_candidate": {
+        "neutral_descriptive": 1
+      }
+    },
+    "https://www.hindi.awazthevoice.in": {
+      "protest_organiser": {
+        "neutral_descriptive": 3
+      }
+    },
+    "inextlive": {
+      "student_candidate": {
+        "neutral_descriptive": 1
+      }
+    },
+    "knewsindia.in": {
+      "student_candidate": {
+        "unclear": 1
+      }
+    },
+    "mint": {
+      "court_public_institution": {
+        "unclear": 1
+      },
+      "education_exam_authority": {
+        "neutral_descriptive": 1
+      },
+      "government_representative": {
+        "unclear": 1
+      },
+      "police": {
+        "neutral_descriptive": 1
+      },
+      "protest_organiser": {
+        "neutral_descriptive": 6,
+        "unclear": 2
+      },
+      "student_candidate": {
+        "neutral_descriptive": 3
+      }
+    },
+    "ummid": {
+      "student_candidate": {
+        "neutral_descriptive": 1
+      }
+    },
+    "टीएनपी न्यूज़": {
+      "court_public_institution": {
+        "neutral_descriptive": 1
+      }
+    },
+    "दैनिक भास्कर हिन्दी (Dainik Bhaskar Hindi)": {
+      "court_public_institution": {
+        "unclear": 1
+      },
+      "government_representative": {
+        "unclear": 3
+      },
+      "student_candidate": {
+        "unclear": 1
+      }
+    },
+    "हिंदुस्तान": {
+      "government_representative": {
+        "neutral_descriptive": 1
+      },
+      "protest_organiser": {
+        "neutral_descriptive": 4
+      },
+      "student_candidate": {
+        "neutral_descriptive": 6
+      }
+    }
+  },
+  "stance_by_target_actor": {
+    "Bharatiya Janata Party (BJP)": {
+      "neutral_descriptive": 3
+    },
+    "Central Bureau of Investigation (CBI)": {
+      "neutral_descriptive": 3
+    },
+    "Dharmendra Pradhan": {
+      "critical": 36,
+      "neutral_descriptive": 2,
+      "unclear": 9
+    },
+    "Indian National Congress": {
+      "critical": 1,
+      "neutral_descriptive": 6,
+      "unclear": 1
+    },
+    "Ministry of Education": {
+      "unclear": 1
+    },
+    "NEET candidates and students": {
+      "favourable": 15,
+      "neutral_descriptive": 116,
+      "unclear": 12
+    },
+    "NEET protest organisers and participants": {
+      "critical": 1,
+      "favourable": 16,
+      "neutral_descriptive": 217,
+      "unclear": 25
+    },
+    "National Testing Agency (NTA)": {
+      "neutral_descriptive": 15,
+      "unclear": 2
+    },
+    "Opposition parties": {
+      "critical": 2,
+      "neutral_descriptive": 4,
+      "unclear": 1
+    },
+    "Parents of NEET candidates": {
+      "neutral_descriptive": 11,
+      "unclear": 1
+    },
+    "Parliament of India": {
+      "neutral_descriptive": 14,
+      "unclear": 3
+    },
+    "Police": {
+      "critical": 9,
+      "neutral_descriptive": 31
+    },
+    "Sonam Wangchuk": {
+      "neutral_descriptive": 3
+    },
+    "Supreme Court of India": {
+      "neutral_descriptive": 18
+    },
+    "Union Education Minister": {
+      "critical": 16,
+      "neutral_descriptive": 5,
+      "unclear": 6
+    },
+    "Union Government": {
+      "critical": 6,
+      "favourable": 1,
+      "neutral_descriptive": 18,
+      "unclear": 4
+    }
+  },
+  "stance_by_target_type": {
+    "court_public_institution": {
+      "neutral_descriptive": 35,
+      "unclear": 3
+    },
+    "education_exam_authority": {
+      "neutral_descriptive": 15,
+      "unclear": 3
+    },
+    "government_representative": {
+      "critical": 58,
+      "favourable": 1,
+      "neutral_descriptive": 25,
+      "unclear": 19
+    },
+    "opposition_party": {
+      "critical": 3,
+      "neutral_descriptive": 10,
+      "unclear": 2
+    },
+    "parent": {
+      "neutral_descriptive": 11,
+      "unclear": 1
+    },
+    "police": {
+      "critical": 9,
+      "neutral_descriptive": 31
+    },
+    "protest_organiser": {
+      "critical": 1,
+      "favourable": 16,
+      "neutral_descriptive": 220,
+      "unclear": 25
+    },
+    "ruling_party": {
+      "neutral_descriptive": 3
+    },
+    "student_candidate": {
+      "favourable": 15,
+      "neutral_descriptive": 116,
+      "unclear": 12
+    }
+  },
+  "topic_duration_seconds": {},
+  "topic_record_counts": {
+    "courts_legal_process": 29,
+    "evidence_verification": 11,
+    "examination_administration": 304,
+    "government_response": 104,
+    "other_relevant": 2,
+    "parent_response": 12,
+    "party_politics": 23,
+    "policing_public_order": 54,
+    "protest_demands": 266,
+    "public_disruption": 1,
+    "student_candidate_experience": 146
+  }
+}
