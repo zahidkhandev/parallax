@@ -59,6 +59,7 @@ python -m src accessibility --report dashboard/index.html --output build/accessi
 python -m src readiness --output build/release-readiness.json
 python -m src reliability --output build/reliability.json
 python -m src inventory-audit --output build/inventory-audit.json
+python -m src discover --report-through 2026-07-29 --max-results 100
 python -m src bundle --draft --output build/parallax-bundle
 ```
 
@@ -73,6 +74,10 @@ The rolling reporting window begins **1 July 2026**. `--as-of YYYY-MM-DD` fixes 
 Independent double-coding labels in `public-data/reliability-annotations.jsonl` are evaluated per field with `reliability`. The output reports pair counts, excluded groups, categorical percent agreement and Cohen’s kappa, and multi-label exact agreement and mean Jaccard. It deliberately does not collapse reliability into one score. Reviewers must follow [REVIEWER_HANDBOOK.md](REVIEWER_HANDBOOK.md).
 
 All evidence URLs must first appear as `included` records in `public-data/source-inventory.jsonl`. The inventory retains pending and excluded discoveries, availability failures, discovery methods, queries, languages, and formats so collection coverage and missingness are auditable. `inventory-audit` reports these dimensions separately without treating them as outlet-quality or political scores. Follow [COLLECTION_PROTOCOL.md](COLLECTION_PROTOCOL.md).
+
+The first pilot discovery design is frozen in `methodology/collection-round-001.json` for 1–29 July 2026. It declares English and Hindi query families, result-depth and deduplication rules, and collection limitations. Its planned status and execution log distinguish intended searches from searches that were actually run. Contributors can propose URLs through the source-discovery issue form; proposals remain pending until scope and metadata review.
+
+`discover` executes every frozen English and Hindi query against a news-search RSS feed, records one execution entry per query, merges canonical result URLs without duplication, and adds every new result as `pending_review`. It never creates stance or evidence annotations. The separate `Discover source candidates` GitHub Actions workflow runs daily or on demand, validates the inventory, pushes a bot-owned branch, and opens a human-review pull request. Repository settings must permit GitHub Actions to create pull requests. Search feeds can return aggregator links or incomplete metadata, so reviewers must verify the original publisher URL, publication time, event scope, language, availability, and media format before changing eligibility to `included`.
 
 `bundle` assembles the validated public data, generated metrics, HTML report, readiness and reliability reports, inventory audit, schemas, taxonomy, licences, and methodology documents into one checksummed directory. Strict mode refuses a bundle until release gates pass; `--draft` produces an explicitly labelled, reproducible collection-stage bundle for CI and review. Private workspace files and downloaded media are never copied.
 

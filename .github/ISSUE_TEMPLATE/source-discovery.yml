@@ -1,0 +1,88 @@
+name: Submit a discovered source
+description: Propose an in-scope media URL for inventory review; this does not create an evidence finding.
+title: "[Source]: "
+labels:
+  - source-intake
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Submit media coverage connected specifically to the NEET 2026 protests and published on or after 1 July 2026. Do not infer stance, bias, motive, honesty, ideology, or character in this form. Do not upload media, subtitles, credentials, or complete transcripts.
+  - type: input
+    id: url
+    attributes:
+      label: Canonical source URL
+      description: Prefer the original publisher URL rather than an aggregator or mirror.
+      placeholder: https://example.org/news/item
+    validations:
+      required: true
+  - type: input
+    id: outlet
+    attributes:
+      label: Outlet
+    validations:
+      required: true
+  - type: input
+    id: title
+    attributes:
+      label: Published title
+    validations:
+      required: true
+  - type: input
+    id: published_at
+    attributes:
+      label: Publication date and time
+      description: Include the displayed timezone or UTC offset when available.
+      placeholder: 2026-07-15T18:30:00+05:30
+    validations:
+      required: true
+  - type: dropdown
+    id: language
+    attributes:
+      label: Primary language
+      options:
+        - English
+        - Hindi
+        - Another language
+        - Unknown
+    validations:
+      required: true
+  - type: dropdown
+    id: format
+    attributes:
+      label: Media format
+      options:
+        - TV report
+        - TV debate
+        - Digital video
+        - Interview
+        - Live stream
+        - Article with video
+        - Other news media
+    validations:
+      required: true
+  - type: input
+    id: discovery
+    attributes:
+      label: Discovery method and exact query
+      description: State where and how the URL was found so collection can be reproduced.
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Event connection
+      description: Briefly identify the observable connection to the NEET 2026 protests without classifying stance.
+    validations:
+      required: true
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: Submission checks
+      options:
+        - label: I did not select this source because I expected favourable or critical treatment of an actor.
+          required: true
+        - label: I have not uploaded media, subtitles, secrets, or a complete transcript.
+          required: true
+        - label: I understand that this submission remains pending until eligibility and metadata are reviewed.
+          required: true

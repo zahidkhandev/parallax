@@ -21,6 +21,13 @@ from .analysis_models import (
 )
 from .analytics import AnalysisOptions, AnalysisProvenance, build_summary
 from .bundle import BundleBuildError, build_release_bundle
+from .discovery import (
+    DEFAULT_ROUND,
+    DiscoveryError,
+    execute_google_news_round,
+    load_round,
+    write_discovery_results,
+)
 from .inventory import (
     DEFAULT_INVENTORY,
     DEFAULT_INVENTORY_SCHEMA,
@@ -241,6 +248,14 @@ def build_parser() -> argparse.ArgumentParser:
     accessibility.add_argument("--report", type=Path, required=True)
     accessibility.add_argument("--output", type=Path, required=True)
     accessibility.add_argument("--require-pass", action="store_true")
+
+    discover = subparsers.add_parser(
+        "discover", help="collect pending source candidates from the frozen query protocol"
+    )
+    discover.add_argument("--round", type=Path, default=DEFAULT_ROUND)
+    discover.add_argument("--inventory", type=Path, default=DEFAULT_INVENTORY)
+    discover.add_argument("--report-through", type=date.fromisoformat, default=date.today())
+    discover.add_argument("--max-results", type=int, default=100)
     return parser
 
 
@@ -391,7 +406,24 @@ def run(argv: Sequence[str] | None = None) -> int:
             print(f"Accessibility audit {state}; wrote {args.output}.")
             if args.require_pass and not audit["passed"]:
                 return 2
-    except (OSError, PublicDataValidationError, BundleBuildError) as exc:
+        elif args.command == "discover":
+            collection_round = load_round(args.round)
+            discovery = execute_google_news_round(
+                collection_round,
+                through=args.report_through,
+                limit=args.max_results,
+            )
+            added, retrieved = write_discovery_results(
+                round_path=args.round,
+                inventory_path=args.inventory,
+                payload=collection_round,
+                run=discovery,
+            )
+            print(
+                f"Retrieved {retrieved} candidate result(s); added {added} unique "
+                f"pending source(s) to {args.inventory}."
+            )
+    except (OSError, PublicDataValidationError, BundleBuildError, DiscoveryError) as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 1
     return 0

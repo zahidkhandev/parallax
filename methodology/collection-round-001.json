@@ -1,0 +1,50 @@
+{
+  "round_id": "collection-round-001",
+  "protocol_version": "1.0.0",
+  "status": "planned",
+  "collection_start": "2026-07-01",
+  "report_through": "2026-07-29",
+  "publication_date_timezone": "Use the timezone displayed by the publisher; preserve the UTC offset in inventory records.",
+  "event_scope": "Media coverage specifically connected to the NEET 2026 protests.",
+  "discovery_surfaces": [
+    "general web news search",
+    "publisher site search",
+    "video-platform search"
+  ],
+  "query_families": [
+    {
+      "language": "en",
+      "queries": [
+        "NEET 2026 protest",
+        "NEET UG 2026 protest",
+        "NEET 2026 student protest",
+        "NEET 2026 candidates protest",
+        "NEET 2026 parents protest",
+        "NEET 2026 demonstration"
+      ]
+    },
+    {
+      "language": "hi",
+      "queries": [
+        "नीट 2026 विरोध प्रदर्शन",
+        "नीट यूजी 2026 छात्र प्रदर्शन",
+        "नीट 2026 अभ्यर्थी विरोध",
+        "नीट 2026 छात्रों का प्रदर्शन"
+      ]
+    }
+  ],
+  "date_filter": "2026-07-01 through 2026-07-29 inclusive",
+  "result_depth": "Record up to 100 retrievable results per query and discovery surface before deduplication.",
+  "outlet_selection": "No outlet is included or excluded because of expected stance. Record every retrieved news-media result, then apply the published event-scope rule.",
+  "deduplication": "Use the original publisher URL when available. Retain materially distinct editorial versions and document their relationship.",
+  "recommendations": "Do not add algorithmic recommendations unless the recommendation surface is separately named as the discovery method.",
+  "syndication": "Prefer the original publisher; retain a syndicated version only when its packaging or spoken content is materially distinct.",
+  "unavailable_items": "Retain an inventory record with the observed availability state and discovery provenance.",
+  "eligibility_blinding": "Review event scope before any stance annotation. Do not inspect expected stance to decide inclusion.",
+  "execution_log": [],
+  "limitations": [
+    "Search ranking and indexing can vary by account, location, language, and collection time.",
+    "This first round begins with English and Hindi queries and must not be described as exhaustive multilingual coverage.",
+    "Planned queries are not evidence that a search was executed; each execution must be appended to execution_log before release."
+  ]
+}

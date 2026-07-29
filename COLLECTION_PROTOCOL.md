@@ -18,6 +18,35 @@ For each collection round, document in release notes or a versioned protocol sup
 
 Do not silently tune queries after seeing whether results appear favourable or critical toward an actor. Record material query revisions and rerun comparable searches where feasible.
 
+The first reproducible pilot is declared in `methodology/collection-round-001.json`. Its
+queries are frozen before source review. The `status` remains `planned`, and an empty
+`execution_log` must not be represented as completed discovery. Each real search run must
+record its surface, exact query, execution timestamp, result depth, and collector before
+candidate URLs are added to the inventory.
+
+## GitHub discovery automation
+
+The `Discover source candidates` workflow runs the frozen query families through the
+`parallax discover` command on a daily schedule or by manual dispatch. It writes new URLs
+only as `pending_review`, validates the result, and opens a pull request. It does not label
+stance, determine eligibility, merge its own pull request, or download media. Maintainers
+must enable the repository setting that allows GitHub Actions to create pull requests.
+
+The initial provider is a public news-search RSS feed. Provider ranking is a discovery
+limitation rather than a sampling guarantee. Feed URLs may be aggregator redirects and
+metadata may be incomplete; review and replace them with original publisher URLs where
+available. A completed automated execution records its provider, query, language, UTC
+timestamp, report-through date, requested depth, and retrieved count in the round log.
+
+Run the same collector locally with:
+
+```bash
+python -m src discover --report-through 2026-07-29 --max-results 100
+```
+
+Do not run concurrent collectors against the same inventory. The GitHub workflow uses a
+concurrency group and pull-request review to serialize changes.
+
 ## Inventory records
 
 Store one line per discovered canonical URL in `public-data/source-inventory.jsonl`. Record source ID, URL, outlet, programme, title, publication/access timestamps, original language, format, availability, eligibility, discovery method/query, and notes. Mixed streams may include the eligible start/end range. Do not add downloaded media, subtitles, complete transcripts, cookies, or credentials.
