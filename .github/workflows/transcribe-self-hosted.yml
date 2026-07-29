@@ -1,0 +1,165 @@
+name: Transcribe media on self-hosted runner
+
+on:
+  workflow_dispatch:
+    inputs:
+      report_through:
+        description: Inclusive evidence date
+        required: true
+        type: string
+        default: "2026-07-29"
+      limit:
+        description: Maximum audiovisual sources; 0 means all
+        required: true
+        type: string
+        default: "0"
+      download_audio:
+        description: Download audio when captions are unavailable
+        required: true
+        type: boolean
+        default: false
+      cookies_from_browser:
+        description: Optional yt-dlp browser cookie source, such as chrome or firefox
+        required: false
+        type: string
+      whisper_model:
+        description: Faster-Whisper model size
+        required: true
+        type: string
+        default: "small"
+      whisper_device:
+        description: Faster-Whisper device, normally cpu or cuda
+        required: true
+        type: string
+        default: "cpu"
+      whisper_compute_type:
+        description: Faster-Whisper compute type, normally int8 or float16
+        required: true
+        type: string
+        default: "int8"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: self-hosted-transcript-evidence
+  cancel-in-progress: false
+
+jobs:
+  transcribe:
+    runs-on: [self-hosted, parallax-transcriber]
+    timeout-minutes: 360
+    defaults:
+      run:
+        shell: bash
+    env:
+      PRIVATE_ROOT: ${{ runner.temp }}/../parallax-private-workspace
+      REPORT_THROUGH: ${{ inputs.report_through }}
+      SOURCE_LIMIT: ${{ inputs.limit }}
+      COOKIES_FROM_BROWSER: ${{ inputs.cookies_from_browser }}
+      WHISPER_MODEL: ${{ inputs.whisper_model }}
+      WHISPER_DEVICE: ${{ inputs.whisper_device }}
+      WHISPER_COMPUTE_TYPE: ${{ inputs.whisper_compute_type }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install acquisition and transcription tools
+        run: python -m pip install -e '.[dev,transcripts,asr,media]'
+
+      - name: Acquire captions or permitted local audio
+        env:
+          DOWNLOAD_AUDIO: ${{ inputs.download_audio }}
+        run: |
+          args=(
+            --as-of "$REPORT_THROUGH"
+            --limit "$SOURCE_LIMIT"
+            --private-root "$PRIVATE_ROOT"
+            --report build/media-acquisition-report.json
+          )
+          if [[ "$DOWNLOAD_AUDIO" == "true" ]]; then
+            args+=(--download-audio)
+          fi
+          if [[ -n "$COOKIES_FROM_BROWSER" ]]; then
+            args+=(--cookies-from-browser "$COOKIES_FROM_BROWSER")
+          fi
+          python -m src.media_acquisition "${args[@]}"
+
+      - name: Transcribe and generate machine-only spoken evidence
+        run: |
+          python -m src.transcript_evidence \
+            --as-of "$REPORT_THROUGH" \
+            --network \
+            --local-asr \
+            --private-root "$PRIVATE_ROOT/transcripts" \
+            --whisper-model "$WHISPER_MODEL" \
+            --whisper-device "$WHISPER_DEVICE" \
+            --whisper-compute-type "$WHISPER_COMPUTE_TYPE" \
+            --report build/transcript-evidence-report.json
+
+      - name: Validate generated evidence
+        run: |
+          python -m src schema
+          python -m src inventory-schema
+          python -m src taxonomy
+          python -m src validate --as-of "$REPORT_THROUGH"
+          python -m src analyze \
+            --as-of "$REPORT_THROUGH" \
+            --include-machine-only \
+            --output build/transcript-machine-metrics.json
+
+      - name: Run quality checks
+        run: |
+          python -m ruff check .
+          python -m pytest
+
+      - name: Detect public evidence changes
+        id: changes
+        run: |
+          if git diff --quiet -- \
+            public-data/evidence-segments.jsonl \
+            public-data/collection-manifest.json; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit machine-only transcript branch
+        if: steps.changes.outputs.changed == 'true'
+        env:
+          BRANCH: automation/transcript-evidence-${{ github.run_id }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$BRANCH"
+          git add \
+            public-data/evidence-segments.jsonl \
+            public-data/collection-manifest.json
+          git add -f \
+            build/media-acquisition-report.json \
+            build/transcript-evidence-report.json \
+            build/transcript-machine-metrics.json
+          git commit -m "Generate machine-only spoken evidence"
+          git push --set-upstream origin "$BRANCH"
+
+      - name: Open transcript evidence pull request
+        if: steps.changes.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BRANCH: automation/transcript-evidence-${{ github.run_id }}
+          THROUGH: ${{ inputs.report_through }}
+        run: |
+          gh pr create \
+            --head "$BRANCH" \
+            --base "$GITHUB_REF_NAME" \
+            --title "Add machine-only spoken evidence through $THROUGH" \
+            --body "Automated caption and local-ASR evidence. Complete transcripts and media remain outside Git. Every new spoken record is Tier D and machine_only, is excluded from default analytics, and requires review before it can support a confirmed public finding."

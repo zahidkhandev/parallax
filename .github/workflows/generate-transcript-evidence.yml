@@ -1,0 +1,100 @@
+name: Generate transcript evidence
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - "src/transcript_evidence.py"
+      - "tests/test_transcript_evidence.py"
+      - "TRANSCRIPT_AUTOMATION.md"
+      - "pyproject.toml"
+      - ".github/workflows/generate-transcript-evidence.yml"
+  workflow_dispatch:
+    inputs:
+      report_through:
+        description: Inclusive evidence date
+        required: true
+        default: "2026-07-29"
+      limit:
+        description: Maximum eligible audiovisual sources; 0 means all
+        required: true
+        default: "0"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: transcript-evidence-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  caption-first:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      TARGET_BRANCH: ${{ github.event.pull_request.head.ref || github.ref_name }}
+      REPORT_THROUGH: ${{ inputs.report_through || '2026-07-29' }}
+      SOURCE_LIMIT: ${{ inputs.limit || '0' }}
+    steps:
+      - name: Check out transcript branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ env.TARGET_BRANCH }}
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install caption pipeline
+        run: python -m pip install -e '.[dev,transcripts]'
+
+      - name: Acquire captions and generate spoken evidence
+        run: >-
+          python -m src.transcript_evidence
+          --as-of "${REPORT_THROUGH}"
+          --network
+          --timeout 12
+          --limit "${SOURCE_LIMIT}"
+          --report build/transcript-evidence-report.json
+
+      - name: Validate generated evidence
+        run: |
+          python -m src schema
+          python -m src inventory-schema
+          python -m src taxonomy
+          python -m src validate --as-of "${REPORT_THROUGH}"
+
+      - name: Build exploratory transcript metrics
+        run: >-
+          python -m src analyze
+          --as-of "${REPORT_THROUGH}"
+          --include-machine-only
+          --output build/transcript-machine-metrics.json
+
+      - name: Run quality checks
+        run: |
+          python -m ruff check .
+          python -m pytest
+
+      - name: Commit generated transcript artifacts
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            public-data/evidence-segments.jsonl \
+            public-data/collection-manifest.json
+          git add -f \
+            build/transcript-evidence-report.json \
+            build/transcript-machine-metrics.json
+          if git diff --cached --quiet; then
+            echo "No generated changes to commit."
+            exit 0
+          fi
+          git commit -m "Generate machine-only transcript evidence"
+          git push origin "HEAD:${TARGET_BRANCH}"
